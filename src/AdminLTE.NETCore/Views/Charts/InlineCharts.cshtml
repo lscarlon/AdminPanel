@@ -1,0 +1,15 @@
+@*http://www.davepaquette.com/archive/2015/06/03/mvc-6-cache-tag-helper.aspx*@
+<cache expires-sliding="@TimeSpan.FromMinutes(5)">
+    <html-extraction html-local-path="@System.IO.Path.Combine("wwwroot","lib","AdminLTE-2.3.11","pages","charts","inline.html")"></html-extraction>
+</cache>
+
+@section Scripts {
+    <!-- This is needed for non partial rendering -->
+    <!-- jQuery Knob -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/knob/jquery.knob.js"></script>*@
+    <!-- Sparkline -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/sparkline/jquery.sparkline.min.js"></script>*@
+    <!-- Inline script -->
+    <script src="~/js/Inline.js"></script>
+
+}

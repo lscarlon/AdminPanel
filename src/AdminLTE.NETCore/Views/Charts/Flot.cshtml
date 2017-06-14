@@ -1,0 +1,19 @@
+@*http://www.davepaquette.com/archive/2015/06/03/mvc-6-cache-tag-helper.aspx*@
+<cache expires-sliding="@TimeSpan.FromMinutes(5)">
+    <html-extraction html-local-path="@System.IO.Path.Combine("wwwroot","lib","AdminLTE-2.3.11","pages","charts","flot.html")"></html-extraction>
+</cache>
+
+@section Scripts {
+    <!-- This is needed for non partial rendering -->
+    <!-- FLOT CHARTS -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/flot/jquery.flot.min.js"></script>*@
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/flot/jquery.flot.resize.min.js"></script>*@
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/flot/jquery.flot.pie.min.js"></script>*@
+    <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+    @*<script src="~/lib/AdminLTE-2.3.11/plugins/flot/jquery.flot.categories.min.js"></script>*@
+    <!-- Flot script -->
+    <script src="~/js/Flot.js"></script>
+
+}
