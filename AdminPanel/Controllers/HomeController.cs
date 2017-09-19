@@ -15,9 +15,12 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
-        public IActionResult Default()
+        public IActionResult Default(bool partial = false)
         {
-            return View();
+            if (partial)
+                return PartialView();
+            else
+                return View();
         }
 
     }
