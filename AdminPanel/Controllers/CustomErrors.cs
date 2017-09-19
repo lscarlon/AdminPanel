@@ -7,14 +7,10 @@ using AdminPanel.Attributes;
 
 namespace AdminPanel.Controllers
 {
-    [DisplayOrder(1)]
-    [DisplayImage("fa fa-dashboard")]
-    [TreeView("i", "fa fa-angle-left pull-right", "")]
+    [DisplayOrder(-1)]
     public class CustomErrorsController : Controller
     {
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
-        [ScriptAfterPartialView("")]
+
         public IActionResult E404(bool partial = false)
         {
             if (partial)

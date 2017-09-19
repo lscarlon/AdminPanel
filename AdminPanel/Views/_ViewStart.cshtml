@@ -1,3 +1,14 @@
-﻿@{
+﻿@{  
     Layout = "_Layout";
+    var controller = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+    string cLayout = "";
+    if (controller == "login") 
+    {
+        cLayout = "~/Views/Shared/_LoginLayout.cshtml";
+    }
+    else
+    {
+        cLayout = "~/Views/Shared/_Layout.cshtml";
+    }
+    Layout = cLayout;
 }

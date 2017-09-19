@@ -22,7 +22,8 @@ namespace AdminPanel.Models
             _controllerInfo = Assembly.GetEntryAssembly()
                 .GetTypes()
                 .AsEnumerable()
-                .Where(type => typeof(Controller).IsAssignableFrom(type)) //&& Can add a filter here to not include some controllers.
+                .Where(type => typeof(Controller).IsAssignableFrom(type))
+                .Where(type => type.GetTypeInfo().GetCustomAttribute<DisplayOrderAttribute>().DisplayOrder>=0) //Escludo i controller con DisplayOrder negativo
                 .ToList()
                 .OrderBy(t =>
                 {

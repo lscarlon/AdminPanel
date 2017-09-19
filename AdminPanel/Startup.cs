@@ -62,7 +62,7 @@ namespace AdminPanel
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/CustomErrors/Error");
             }
 
             app.UseStaticFiles();
@@ -74,6 +74,10 @@ namespace AdminPanel
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Default}/{id?}");
+                routes.MapRoute(
+                    "E404-PageNotFound",
+                    "{*url}",
+                    new { controller = "CustomErrors", action = "E404" });
             });
         }
     }
