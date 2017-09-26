@@ -61,6 +61,7 @@ namespace AdminPanel
             services.ConfigureApplicationCookie(options => { 
                 options.LoginPath = "/Login/Login";
                 options.LogoutPath = "/Login/LockScreen";
+                options.AccessDeniedPath = "/Login/AccessDenied";
             });
 
             // Add framework services.

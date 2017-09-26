@@ -65,6 +65,19 @@ namespace AdminPanel.Controllers
             }
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SignOff()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
         public IActionResult LockScreen()
         {
             return View();

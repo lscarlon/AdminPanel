@@ -29,26 +29,17 @@
                         <td>@item.Description</td>
                         <td>@item.NumberOfUsers</td>
                         <td>
-                            <div class="btn-group">
-                                @*<a id="addEditApplicationRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
-                                   class="btn btn-info">
-                                    <i class="glyphicon glyphicon-pencil"></i>  Edit
-                                </a>*@
                                 <a id="addEditApplicationRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
                                    class="btn btn-info btn-sm">
                                     <i class="fa fa-edit"></i> Edit
                                 </a>
                                 @if (item.NumberOfUsers == 0)
                                 {
-                                    @*<a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role" class="btn btn-danger">
-                                        <i class="glyphicon glyphicon-trash"></i>  Delete
-                                    </a>*@
                                     <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
                                        class="btn btn-danger btn-sm">
                                         <i class="fa fa-trash"></i> Delete
                                     </a>
                                 }
-                            </div>
                         </td>
                     </tr>
                 }

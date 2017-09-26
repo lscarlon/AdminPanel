@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{0EA4A6E3-DDEC-426F-9892-8687F5490A7C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SorgentiEsempio", "SorgentiEsempio", "{0EA4A6E3-DDEC-426F-9892-8687F5490A7C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B3151AB9-66A1-48AD-ADEF-3ECB5BFF6B86}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminLTE.NETCore", "src\AdminLTE.NETCore\AdminLTE.NETCore.csproj", "{A3D6B92F-4C4D-4345-A912-9B40332B7506}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdminPanel", "AdminPanel\AdminPanel.csproj", "{77CDF1CD-E5A7-4B69-884E-3B2775518784}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminPanel", "AdminPanel\AdminPanel.csproj", "{77CDF1CD-E5A7-4B69-884E-3B2775518784}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,5 +31,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A3D6B92F-4C4D-4345-A912-9B40332B7506} = {0EA4A6E3-DDEC-426F-9892-8687F5490A7C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EB97A1D-A4F2-47A9-9A10-DA0DC47C5A7C}
 	EndGlobalSection
 EndGlobal
