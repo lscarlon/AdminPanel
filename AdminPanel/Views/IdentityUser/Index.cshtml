@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<IdentityUserListViewModel>
 @using AdminPanel.Models
-@using AdminPanel.Common
 
 <div class="top-buffer"></div>
 <div class="panel panel-primary">
@@ -43,7 +42,7 @@
     </div>
 </div>
 
-@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
+@Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
 
 @section scripts
 {

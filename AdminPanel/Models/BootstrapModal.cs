@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AdminPanel.Common;
 
 namespace AdminPanel.Models
 {
-    public class BootstrapModel
+    public class BootstrapModal
     {
         public string ID { get; set; }
         public string AreaLabeledId { get; set; }
@@ -28,5 +27,26 @@ namespace AdminPanel.Models
                 }
             }
         }
+    }
+
+    public class ModalHeader
+    {
+        public string Heading { get; set; }
+    }
+
+    public class ModalFooter
+    {
+        public string SubmitButtonText { get; set; } = "Submit";
+        public string CancelButtonText { get; set; } = "Cancel";
+        public string SubmitButtonID { get; set; } = "btn-submit";
+        public string CancelButtonID { get; set; } = "btn-cancel";
+        public bool OnlyCancelButton { get; set; }
+    }
+
+    public enum ModalSize
+    {
+        Small,
+        Large,
+        Medium
     }
 }

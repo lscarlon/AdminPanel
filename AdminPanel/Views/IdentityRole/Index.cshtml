@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<IdentityRoleListViewModel>
 @using AdminPanel.Models
-@using AdminPanel.Common
 
 <div class="top-buffer"></div>
 <div class="panel panel-primary">
@@ -48,7 +47,7 @@
     </div>
 </div>
 
-@Html.Partial("_Modal", new BootstrapModel { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })
+@Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })
 
 @section scripts
 {
