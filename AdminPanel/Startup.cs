@@ -10,6 +10,9 @@ using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
 using Microsoft.AspNetCore.ResponseCompression;
 using System.IO.Compression;
+using AdminPanel.Identity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel
 {
@@ -41,6 +44,25 @@ namespace AdminPanel
                 options.Providers.Add<GzipCompressionProvider>();
             });
 
+            services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, Role>(o => {
+                // configure identity options
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            })
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options => { 
+                options.LoginPath = "/Login/Login";
+                options.LogoutPath = "/Login/LockScreen";
+            });
+
             // Add framework services.
             services.AddMvc();
 
@@ -64,6 +86,8 @@ namespace AdminPanel
             {
                 app.UseExceptionHandler("/CustomErrors/Error");
             }
+
+            app.UseAuthentication();
 
             app.UseStaticFiles();
 
