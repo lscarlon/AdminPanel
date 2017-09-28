@@ -4,30 +4,30 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
 using AdminPanel.Attributes;
 using AdminPanel.Models;
 using AdminPanel.Identity;
-using Microsoft.AspNetCore.Http;
-
-
 
 namespace AdminPanel.Controllers
 {
     [DisplayOrder(1)]
-    [DisplayImage("fa fa-dashboard")]
+    [DisplayImage("glyphicon glyphicon-log-in")]
     [TreeView("i", "fa fa-angle-left pull-right", "")]
     public class IdentityRoleController : Controller
     {
         private readonly RoleManager<Role> roleManager;
+        private readonly AppDbContext db;
 
-        public IdentityRoleController(RoleManager<Role> roleManager)
+        public IdentityRoleController(RoleManager<Role> roleManager, AppDbContext db)
         {
             this.roleManager = roleManager;
+            this.db = db;
         }
 
         [HttpGet]
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
+        //[DisplayActionMenu]
+        //[DisplayImage("glyphicon glyphicon-user")]
         [ScriptAfterPartialView("")]
         public IActionResult Index(bool partial = false)
         {
@@ -37,15 +37,12 @@ namespace AdminPanel.Controllers
                 RoleName = r.Name,
                 Id = r.Id,
                 Description = r.Description,
-                //NumberOfUsers = r.Users.Count
-                NumberOfUsers = 0
+                NumberOfUsers = db.UserRoles.Where(ur => ur.RoleId == r.Id).Count()
             }).ToList();
             return View(model);
         }
 
         [HttpGet]
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {
@@ -64,8 +61,6 @@ namespace AdminPanel.Controllers
         }
 
         [HttpPost]
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
         public async Task<IActionResult> AddEditApplicationRole(string id, IdentityRoleViewModel model)
         {
@@ -91,8 +86,6 @@ namespace AdminPanel.Controllers
         }
 
         [HttpGet]
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
         public async Task<IActionResult> DeleteApplicationRole(string id)
         {
@@ -109,8 +102,6 @@ namespace AdminPanel.Controllers
         }
 
         [HttpPost]
-        [DisplayActionMenu]
-        [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
         public async Task<IActionResult> DeleteApplicationRole(string id, IFormCollection form)
         {

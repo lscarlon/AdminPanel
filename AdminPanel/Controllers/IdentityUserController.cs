@@ -19,26 +19,54 @@ namespace AdminPanel.Controllers
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
+        private readonly AppDbContext db;
 
-        public IdentityUserController(UserManager<User> userManager, RoleManager<Role> roleManager)  
+        public IdentityUserController(UserManager<User> userManager, RoleManager<Role> roleManager, AppDbContext db)  
         {  
             this.userManager = userManager;  
-            this.roleManager = roleManager;  
+            this.roleManager = roleManager;
+            this.db = db;
         }  
 
         [HttpGet]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
-        public IActionResult Index(bool partial = false)
+        public IActionResult Index(string filterRole, bool partial = false)
         {
             List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
             model = userManager.Users.Select(u => new IdentityUserListViewModel
             {
                 Id = u.Id,
                 Name = u.Name,
-                Email = u.Email
+                Email = u.Email,
+                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.First(ur => ur.UserId == u.Id).RoleId).Name
             }).ToList();
+            if (!(filterRole is null)) {
+                model = model.Where(u => u.RoleName == filterRole).ToList();
+            }
+            return View(model);
+        }
+
+        [HttpPost, ActionName("Index")]
+        [DisplayActionMenu]
+        [DisplayImage("fa fa-circle-o")]
+        [ScriptAfterPartialView("")]
+        public IActionResult IndexPost(string filterRole, bool partial = false)
+        {
+            List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
+            model = userManager.Users.Select(u => new IdentityUserListViewModel
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.First(ur => ur.UserId == u.Id).RoleId).Name
+            }).ToList();
+            if (!(filterRole is null))
+            {
+                model = model.Where(u => db.UserRoles.First(ur => ur.UserId == u.Id).RoleId == filterRole).ToList();
+            }
+            //ViewData["DebugMessage"] = filterRole;
             return View(model);
         }
 

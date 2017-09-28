@@ -1,50 +1,85 @@
 ﻿@model IEnumerable<IdentityUserListViewModel>
 @using AdminPanel.Models
 
-<div class="top-buffer"></div>
-<div class="panel panel-primary">
-    <div class="panel-heading panel-head">Application Roles</div>
-    <div class="panel-body">
-        <div class="btn-group">
-            <a id="createEditUserModal" data-toggle="modal" asp-action="AddUser" data-target="#modal-action-user" class="btn btn-primary">
-                <i class="glyphicon glyphicon-plus"></i>  Add User
-            </a>
-        </div>  
-        <div class="top-buffer"></div>
-        <table class="table table-bordered table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr> 
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.Email</td>
-                        <td>
-                            <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
-                               class="btn btn-info btn-sm">
-                                <i class="fa fa-edit"></i>  Edit
-                            </a>
-                            <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user" 
-                               class="btn btn-danger btn-sm">
-                                <i class="fa fa-trash"></i>  Delete
-                            </a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Application Users
+        <small>List</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-log-in"></i> Identity</a></li>
+        <li><a href="#">Users</a></li>
+        <li class="active">List</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="btn-group">
+                        <a id="createEditUserModal" data-toggle="modal" asp-action="AddUser" data-target="#modal-action-user" class="btn btn-primary">
+                            <i class="glyphicon glyphicon-plus"></i>  Add User
+                        </a>
+                    </div>  
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="dataTables_wrapper form-inline dt-bootstrap">
+                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
+                            <div class="col-sm-12">
+                                <table id="tb_users" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="display:none;">Id</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td style="display:none;">@item.Id</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Email</td>
+                                                <td>@item.RoleName</td>
+                                                <td>
+                                                    <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="fa fa-edit"></i>  Edit
+                                                    </a>
+                                                    <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                                       class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>  Delete
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
     </div>
-</div>
+    <!-- /.row -->
+</section>
+<!-- /.content -->
 
 @Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
 
 @section scripts
 {
-    <script src="~/js/Identity-user-index.js" asp-append-version="true"></script>
+    <script src="~/js/IdentityUser-Index.js" asp-append-version="true"></script>
 }   
