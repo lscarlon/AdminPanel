@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO.Compression;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
-using Microsoft.AspNetCore.ResponseCompression;
-using System.IO.Compression;
 using AdminPanel.Identity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel
 {
@@ -47,25 +49,43 @@ namespace AdminPanel
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<User, Role>(o => {
-                // configure identity options
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(o =>
+            {
+                // Password Settings
                 o.Password.RequireDigit = false;
                 o.Password.RequireLowercase = false;
                 o.Password.RequireUppercase = false;
                 o.Password.RequireNonAlphanumeric = false;
                 o.Password.RequiredLength = 6;
-            })
-                .AddEntityFrameworkStores<AppDbContext>()
-                .AddDefaultTokenProviders();
 
-            services.ConfigureApplicationCookie(options => { 
-                options.LoginPath = "/Login/Login";
-                options.LogoutPath = "/Login/LockScreen";
-                options.AccessDeniedPath = "/Login/AccessDenied";
+                // Lockout settings
+                o.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                o.Lockout.MaxFailedAccessAttempts = 10;
+                o.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                o.User.RequireUniqueEmail = true;
+            });
+
+            services.ConfigureApplicationCookie(o => {
+                o.Cookie.Expiration = TimeSpan.FromDays(150);
+                o.LoginPath = "/Login/Login";
+                o.LogoutPath = "/Login/LockScreen";
+                o.AccessDeniedPath = "/Login/AccessDenied";
             });
 
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
 
             //Add the ControllerInformationRepository
             services.AddSingleton<IControllerInformationRepository, ControllerInformationRepository>();

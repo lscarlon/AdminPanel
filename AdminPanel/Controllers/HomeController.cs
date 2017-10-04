@@ -10,7 +10,6 @@ using AdminPanel.Identity;
 
 namespace AdminPanel.Controllers
 {
-    [Authorize]
     [DisplayOrder(0)]
     [DisplayImage("fa fa-dashboard")]
     [TreeView("i", "fa fa-angle-left pull-right", "")]
@@ -23,14 +22,11 @@ namespace AdminPanel.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize(Roles = "SuperAdmin")]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
         public IActionResult Default(bool partial = false)
         {
-            string userName = userManager.GetUserName(User);
-            ViewData["userName"] = userName;
             if (partial)
                 return PartialView();
             else

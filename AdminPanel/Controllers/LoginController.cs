@@ -14,6 +14,7 @@ using AdminPanel.Common;
 
 namespace AdminPanel.Controllers
 {
+
     [DisplayOrder(-1)]
     public class LoginController : Controller
     {
@@ -24,6 +25,7 @@ namespace AdminPanel.Controllers
             this.signInManager = signInManager;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult Login(string returnUrl = null)
         {
@@ -31,8 +33,8 @@ namespace AdminPanel.Controllers
             return View();
         }
 
-        [HttpPost]
         [AllowAnonymous]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(IdentityLoginViewModel model, string returnUrl = null)
         {
@@ -65,6 +67,7 @@ namespace AdminPanel.Controllers
             }
         }
 
+        [AllowAnonymous]
         public IActionResult AccessDenied()
         {
             return View();
@@ -83,6 +86,7 @@ namespace AdminPanel.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return View();

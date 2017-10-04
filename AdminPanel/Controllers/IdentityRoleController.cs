@@ -26,8 +26,8 @@ namespace AdminPanel.Controllers
         }
 
         [HttpGet]
-        //[DisplayActionMenu]
-        //[DisplayImage("glyphicon glyphicon-user")]
+        [DisplayActionMenu]
+        [DisplayImage("glyphicon glyphicon-user")]
         [ScriptAfterPartialView("")]
         public IActionResult Index(bool partial = false)
         {
