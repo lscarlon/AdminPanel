@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AdminPanel.Identity;
 
-namespace AdminPanel.Identity
+namespace AdminPanel.Models
 {
     public class AppDbContext : IdentityDbContext<User, Role, string>
     {

@@ -56,4 +56,17 @@ namespace AdminPanel.Models
         [Display(Name = "Role")]
         public string ApplicationRoleId { get; set; }
     }
+
+    public class IdentityLoginViewModel
+    {
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Display(Name = "Remember me?")]
+        public bool RememberMe { get; set; }
+    }
 }
