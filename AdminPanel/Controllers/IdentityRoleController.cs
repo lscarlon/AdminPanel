@@ -8,13 +8,14 @@ using Microsoft.AspNetCore.Http;
 using AdminPanel.Attributes;
 using AdminPanel.Models;
 using AdminPanel.Identity;
+using AdminPanel.Common;
 
 namespace AdminPanel.Controllers
 {
     [DisplayOrder(1)]
     [DisplayImage("glyphicon glyphicon-log-in")]
     [TreeView("i", "fa fa-angle-left pull-right", "")]
-    public class IdentityRoleController : Controller
+    public class IdentityRoleController : CustomController
     {
         private readonly RoleManager<Role> roleManager;
         private readonly AppDbContext db;
@@ -29,6 +30,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("glyphicon glyphicon-user")]
         [ScriptAfterPartialView("")]
+        [CommandName("Index")]
         public IActionResult Index(bool partial = false)
         {
             List<IdentityRoleListViewModel> model = new List<IdentityRoleListViewModel>();

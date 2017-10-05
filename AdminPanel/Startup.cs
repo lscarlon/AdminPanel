@@ -32,11 +32,8 @@ namespace AdminPanel
 
         public IConfigurationRoot Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Add Memory Cache
-            //https://docs.microsoft.com/en-us/aspnet/core/performance/caching/memory
             services.AddMemoryCache();
 
             services.Configure<GzipCompressionProviderOptions>
@@ -78,7 +75,6 @@ namespace AdminPanel
                 o.AccessDeniedPath = "/Login/AccessDenied";
             });
 
-            // Add framework services.
             services.AddMvc(config =>
             {
                 var policy = new AuthorizationPolicyBuilder()
@@ -87,12 +83,11 @@ namespace AdminPanel
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
-            //Add the ControllerInformationRepository
             services.AddSingleton<IControllerInformationRepository, ControllerInformationRepository>();
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));

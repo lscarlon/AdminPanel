@@ -11,19 +11,11 @@ namespace AdminPanel
     public class Program
     {
         public static void Main(string[] args)
-        //{
-        //    var host = new WebHostBuilder()
-        //        .UseKestrel()
-        //        .UseContentRoot(Directory.GetCurrentDirectory())
-        //        .UseIISIntegration()
-        //        .UseStartup<Startup>()
-        //        .UseApplicationInsights()
-        //        .Build();
-
-        //    host.Run();
-        //}
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+            StartupMethods obj = new StartupMethods();
+            obj.LoadCommands();
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

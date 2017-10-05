@@ -4,18 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using AdminPanel.Attributes;
 using AdminPanel.Models;
 using AdminPanel.Identity;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using AdminPanel.Common;
+
+
 
 namespace AdminPanel.Controllers
 {
     [DisplayOrder(2)]
     [DisplayImage("fa fa-dashboard")]
     [TreeView("i", "fa fa-angle-left pull-right", "")]
-    public class IdentityUserController : Controller
+    public class IdentityUserController : CustomController
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<Role> roleManager;
@@ -32,6 +35,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("Index")]
         public IActionResult Index(string filterRole, bool partial = false)
         {
             List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();

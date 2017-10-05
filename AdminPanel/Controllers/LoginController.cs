@@ -16,7 +16,7 @@ namespace AdminPanel.Controllers
 {
 
     [DisplayOrder(-1)]
-    public class LoginController : Controller
+    public class LoginController : CustomController
     {
         private readonly SignInManager<User> signInManager;
 

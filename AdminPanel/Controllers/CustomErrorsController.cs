@@ -4,11 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AdminPanel.Attributes;
+using AdminPanel.Common;
 
 namespace AdminPanel.Controllers
 {
     [DisplayOrder(-1)]
-    public class CustomErrorsController : Controller
+    public class CustomErrorsController : CustomController
     {
 
         public IActionResult E404(bool partial = false)
