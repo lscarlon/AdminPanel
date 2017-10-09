@@ -35,7 +35,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
-        [CommandName("Index")]
+        [CommandName("User List")]
         public IActionResult Index(string filterRole, bool partial = false)
         {
             List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
@@ -56,6 +56,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User List")]
         public IActionResult IndexPost(string filterRole, bool partial = false)
         {
             List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
@@ -180,6 +181,7 @@ namespace AdminPanel.Controllers
                                 }
                             }
                         }
+                        return RedirectToAction("Index");
                     }
                 }
             }

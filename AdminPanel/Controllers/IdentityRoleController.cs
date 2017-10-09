@@ -30,7 +30,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("glyphicon glyphicon-user")]
         [ScriptAfterPartialView("")]
-        [CommandName("Index")]
+        [CommandName("Role List")]
         public IActionResult Index(bool partial = false)
         {
             List<IdentityRoleListViewModel> model = new List<IdentityRoleListViewModel>();
