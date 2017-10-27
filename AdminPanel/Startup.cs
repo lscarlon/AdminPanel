@@ -83,6 +83,9 @@ namespace AdminPanel
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
 
+            services.AddDistributedMemoryCache();
+            services.AddSession();
+
             services.AddSingleton<IControllerInformationRepository, ControllerInformationRepository>();
 
         }
@@ -108,6 +111,8 @@ namespace AdminPanel
             app.UseStaticFiles();
 
             app.UseResponseCompression();
+
+            app.UseSession();
 
             app.UseMvc(routes =>
             {

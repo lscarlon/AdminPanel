@@ -12,5 +12,6 @@ namespace AdminPanel.Models
         }
 
         public DbSet<Command> Commands { get; set; }
+        public DbSet<Menu> Menus { get; set; }
     }
 }

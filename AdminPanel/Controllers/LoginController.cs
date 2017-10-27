@@ -75,6 +75,8 @@ namespace AdminPanel.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CommandName("SignOff")]
+        [ScriptAfterPartialView("")]
         public async Task<IActionResult> SignOff()
         {
             await signInManager.SignOutAsync();

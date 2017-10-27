@@ -34,7 +34,7 @@ namespace AdminPanel.Controllers
         [HttpGet]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
-        [ScriptAfterPartialView("")]
+        [ScriptAfterPartialView("/js/IdentityUser-Index.js")]
         [CommandName("User List")]
         public IActionResult Index(string filterRole, bool partial = false)
         {
@@ -49,13 +49,16 @@ namespace AdminPanel.Controllers
             if (!(filterRole is null)) {
                 model = model.Where(u => u.RoleName == filterRole).ToList();
             }
-            return View(model);
+            if (partial)
+                return PartialView(model);
+            else
+                return View(model);
         }
 
         [HttpPost, ActionName("Index")]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
-        [ScriptAfterPartialView("")]
+        [ScriptAfterPartialView("/js/IdentityUser-Index.js")]
         [CommandName("User List")]
         public IActionResult IndexPost(string filterRole, bool partial = false)
         {
@@ -72,13 +75,17 @@ namespace AdminPanel.Controllers
                 model = model.Where(u => db.UserRoles.First(ur => ur.UserId == u.Id).RoleId == filterRole).ToList();
             }
             //ViewData["DebugMessage"] = filterRole;
-            return View(model);
+            if (partial)
+                return PartialView(model);
+            else
+                return View(model);
         }
 
         [HttpGet]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Add")]
         public IActionResult AddUser()
         {
             IdentityUserViewModel model = new IdentityUserViewModel();
@@ -94,6 +101,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Add")]
         public async Task<IActionResult> AddUser(IdentityUserViewModel model)
         {
             if (ModelState.IsValid)
@@ -125,6 +133,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Edit")]
         public async Task<IActionResult> EditUser(string id)
         {
             IdentityUserEditModel model = new IdentityUserEditModel();
@@ -151,6 +160,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Edit")]
         public async Task<IActionResult> EditUser(string id, IdentityUserEditModel model)
         {
             if (ModelState.IsValid)
@@ -192,6 +202,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Delete")]
         public async Task<IActionResult> DeleteUser(string id)
         {
             string name = string.Empty;
@@ -210,6 +221,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
+        [CommandName("User Delete")]
         public async Task<IActionResult> DeleteUser(string id, IFormCollection form)
         {
             if (!String.IsNullOrEmpty(id))

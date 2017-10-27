@@ -147,13 +147,11 @@
     </environment>
 </head>
 
-<!-- copied directly from AdminLTE index.html (FR) -->
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
         <header class="main-header">
             <!-- Logo -->
             <a href="@Url.Action("Default", "Home")" class="logo">
-                <!-- Modified to be the home controller (FR)-->
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>A</b>Pn</span>
                 <!-- logo for regular state and mobile devices -->
@@ -407,12 +405,10 @@
                 </form>*@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">MENU PRINCIPALE</li>
-                    
-                    @*@await Component.InvokeAsync("ControllerList")*@
-                    <vc:controller-list></vc:controller-list>
-                </ul>
+                            
+                    @await Component.InvokeAsync("MenuNavigator")
+                    <vc:MenuNavigator></vc:MenuNavigator>
+                
             </section>
             <!-- /.sidebar -->
         </aside>

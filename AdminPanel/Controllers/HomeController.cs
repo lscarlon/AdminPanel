@@ -9,6 +9,8 @@ using AdminPanel.Attributes;
 using AdminPanel.Identity;
 using AdminPanel.Common;
 
+using System.Reflection;
+
 namespace AdminPanel.Controllers
 {
     [DisplayOrder(0)]
@@ -29,6 +31,8 @@ namespace AdminPanel.Controllers
         [CommandName("Homepage")]
         public IActionResult Default(bool partial = false)
         {
+            
+
             if (partial)
                 return PartialView();
             else

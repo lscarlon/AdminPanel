@@ -29,7 +29,7 @@ namespace AdminPanel.Controllers
         [HttpGet]
         [DisplayActionMenu]
         [DisplayImage("glyphicon glyphicon-user")]
-        [ScriptAfterPartialView("")]
+        [ScriptAfterPartialView("/js/IdentityRole-Index.js")]
         [CommandName("Role List")]
         public IActionResult Index(bool partial = false)
         {
@@ -41,11 +41,15 @@ namespace AdminPanel.Controllers
                 Description = r.Description,
                 NumberOfUsers = db.UserRoles.Where(ur => ur.RoleId == r.Id).Count()
             }).ToList();
-            return View(model);
+            if (partial)
+                return PartialView(model);
+            else
+                return View(model);
         }
 
         [HttpGet]
         [ScriptAfterPartialView("")]
+        [CommandName("Role Edit")]
         public async Task<IActionResult> AddEditApplicationRole(string id)
         {
             IdentityRoleViewModel model = new IdentityRoleViewModel();
@@ -64,6 +68,7 @@ namespace AdminPanel.Controllers
 
         [HttpPost]
         [ScriptAfterPartialView("")]
+        [CommandName("Role Edit")]
         public async Task<IActionResult> AddEditApplicationRole(string id, IdentityRoleViewModel model)
         {
             if (ModelState.IsValid)
@@ -89,6 +94,7 @@ namespace AdminPanel.Controllers
 
         [HttpGet]
         [ScriptAfterPartialView("")]
+        [CommandName("Role Delete")]
         public async Task<IActionResult> DeleteApplicationRole(string id)
         {
             string name = string.Empty;
@@ -105,6 +111,7 @@ namespace AdminPanel.Controllers
 
         [HttpPost]
         [ScriptAfterPartialView("")]
+        [CommandName("Role Delete")]
         public async Task<IActionResult> DeleteApplicationRole(string id, IFormCollection form)
         {
             if (!String.IsNullOrEmpty(id))

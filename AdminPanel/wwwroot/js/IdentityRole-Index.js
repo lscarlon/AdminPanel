@@ -25,7 +25,6 @@ $(document).ready(function () {
     $('#tb_roles tbody').on('click', 'td', function () {
         var data = table.row($(this).parents('tr')).data();
         if ($(this).closest('table').find('th').eq($(this).index())["0"].innerHTML !== "Action") {
-            //alert('You clicked on ' + data[1] + '\'s row');
             $.redirect('../identityuser/index', { 'filterRole': data[0] });
         }
     });

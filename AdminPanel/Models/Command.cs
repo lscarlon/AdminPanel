@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 
-namespace AdminPanel.Models
+namespace AdminPanel.Models 
 {
-    public class Command
+    public class Command : IEquatable<Command>
     {
         public int CommandID { get; set; }
 
@@ -22,9 +23,19 @@ namespace AdminPanel.Models
         [Timestamp]
         public byte[] RowVersion { get; set; }
 
-        public Command()
+        public bool Equals(Command other)
         {
-          
+            if (other == null)
+            {
+                return false;
+            }
+
+            return (Controller == other.Controller && Action == other.Action && CommandName == other.CommandName);
+        }
+
+        public override int GetHashCode()
+        {
+            return (Controller+Action+CommandName).GetHashCode();
         }
     }
 }
