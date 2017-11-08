@@ -1,5 +1,9 @@
 ﻿@model IdentityLoginViewModel
 @using AdminPanel.Models  
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Authentication
+@using AdminPanel.Identity
+@inject SignInManager<User> signInManager
 
 <!-- /.login-logo -->
 <div class="login-box-body">
@@ -29,21 +33,22 @@
             <!-- /.col -->
         </div>
     </form>
-<!--    
+    
     <div class="social-auth-links text-center">
         <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-social btn-facebook btn-flat">
-            <i class="fa fa-facebook"></i> Sign in using
-            Facebook
-        </a>
-        <a href="#" class="btn btn-block btn-social btn-google btn-flat">
-            <i class="fa fa-google-plus"></i> Sign in using
-            Google+
-        </a>
-    </div>
+        <form asp-controller="Login" asp-action="ExternalLogin" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
+            <button type="submit" class="btn btn-block btn-social btn-google btn-flat" id="Google" name="provider" value="Google" title="Sign in using Google+">
+                    <i class="fa fa-google-plus"></i>Sign in using Google+
+            </button>
+            <button type="submit" class="btn btn-block btn-social btn-facebook btn-flat" id="Facebook" name="provider" value="Facebook" title="Sign in using Facebook">
+                <i class="fa fa-facebook"></i>Sign in using Facebook
+            </button>
+        </form>
+       
+</div>
     
     <a href="#">I forgot my password</a><br>
     <a href="register.html" class="text-center">Register a new membership</a>
--->
+
 </div>
 <!-- /.login-box-body -->

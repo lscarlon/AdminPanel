@@ -10,11 +10,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
 using AdminPanel.Identity;
+
 
 namespace AdminPanel
 {
@@ -26,7 +29,8 @@ namespace AdminPanel
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables()
+                .AddUserSecrets<Startup>();
             Configuration = builder.Build();
         }
 
@@ -49,6 +53,12 @@ namespace AdminPanel
             services.AddIdentity<User, Role>()
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
 
             services.Configure<IdentityOptions>(o =>
             {
@@ -81,6 +91,11 @@ namespace AdminPanel
                     .RequireAuthenticatedUser()
                     .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
             });
 
             services.AddDistributedMemoryCache();
@@ -124,6 +139,8 @@ namespace AdminPanel
                     "{*url}",
                     new { controller = "CustomErrors", action = "E404" });
             });
+
+            app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
         }
     }
 }

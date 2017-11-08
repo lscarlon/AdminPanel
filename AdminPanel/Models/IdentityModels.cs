@@ -69,4 +69,20 @@ namespace AdminPanel.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+
+    public class ExternalLoginConfirmationViewModel
+    {
+        [Required]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string Name { get; set; }
+
+
+    }
 }

@@ -1,0 +1,6 @@
+﻿Eliminare la vecchia gestione del ControllerInfo
+Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default
+Role Claims
+Verificare e sistemare l'aggancio con bower e le cartelle js/css
+Gestione custom degli errori anche 500 (vedi mancanza connessione db)
+Pubblicazione su IIS
