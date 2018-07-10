@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using AdminPanel.Attributes;
 using AdminPanel.Identity;
 using AdminPanel.Common;
 
-using System.Reflection;
 
 namespace AdminPanel.Controllers
 {
@@ -31,12 +30,15 @@ namespace AdminPanel.Controllers
         [CommandName("Homepage")]
         public IActionResult Default(bool partial = false)
         {
-            
+            //foreach (Claim cl in User.Claims.ToList())
+            //{
+            //    ViewBag
+            //}
 
             if (partial)
                 return PartialView();
             else
-                return View();
+                return View(User.Claims.ToList());
         }
 
     }
