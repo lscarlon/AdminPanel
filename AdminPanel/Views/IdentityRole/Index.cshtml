@@ -2,7 +2,7 @@
 @using AdminPanel.Models
 @using System.Web
 
-    <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         Application Roles
@@ -81,10 +81,13 @@
     <!-- /.row -->
 </section>
 <!-- /.content -->
+@*Modifica per Warning MVC1000
+Use of IHtmlHelper.Partial may result in application deadlocks. Consider using <partial> Tag Helper or IHtmlHelper.PartialAsync
+    Vecchia versione
+    @Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })*@
+    <partial name="_Modal" model='new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium }' />
 
-@Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })
-
-@section scripts
-{
-    <script src="~/js/IdentityRole-Index.js" asp-append-version="true"></script>
-}   
+    @section scripts
+        {
+        <script src="~/js/IdentityRole-Index.js" asp-append-version="true"></script>
+    }

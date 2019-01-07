@@ -2,10 +2,12 @@
 @using AdminPanel.Models
 
 <form asp-action="DeleteApplicationRole" role="form">
-    @Html.Partial("_ModalHeader", new ModalHeader { Heading = "Delete Application Role" })
+    @*@Html.Partial("_ModalHeader", new ModalHeader { Heading = "Delete Application Role" })*@
+    <partial name="_ModalHeader" model='new ModalHeader { Heading = "Delete Application Role" }' />
 
     <div class="modal-body form-horizontal">
         Are you want to delete @Model?
     </div>
-    @Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })
+    @*@Html.Partial("_ModalFooter", new ModalFooter { SubmitButtonText = "Delete" })*@
+    <partial name="_ModalFooter" model='new ModalFooter { SubmitButtonText = "Delete" }' />
 </form> 

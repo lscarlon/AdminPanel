@@ -33,14 +33,15 @@
   ],
   "homepage": "https://datatables.net",
   "license": "MIT",
-  "version": "3.2.3",
-  "_release": "3.2.3",
+  "version": "3.2.6",
+  "_release": "3.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "3.2.3",
-    "commit": "12b8175b447ba9f284c98b402ca6a153024a4e6c"
+    "tag": "3.2.6",
+    "commit": "2f604632e0047013c8594b8a142fcdd4156ed187"
   },
   "_source": "https://github.com/DataTables/Dist-DataTables-FixedColumns.git",
-  "_target": ">=3.1.0",
-  "_originalSource": "datatables.net-fixedcolumns"
+  "_target": "3.2.6",
+  "_originalSource": "datatables.net-fixedcolumns",
+  "_direct": true
 }

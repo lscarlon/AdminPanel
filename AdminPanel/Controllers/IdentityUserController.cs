@@ -54,7 +54,7 @@ namespace AdminPanel.Controllers
             else
                 return View(model);
         }
-
+         
         [HttpPost, ActionName("Index")]
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
@@ -88,12 +88,14 @@ namespace AdminPanel.Controllers
         [CommandName("User Add")]
         public IActionResult AddUser()
         {
-            IdentityUserViewModel model = new IdentityUserViewModel();
-            model.ApplicationRoles = roleManager.Roles.Select(r => new SelectListItem
+            IdentityUserViewModel model = new IdentityUserViewModel
             {
-                Text = r.Name,
-                Value = r.Id
-            }).ToList();
+                ApplicationRoles = roleManager.Roles.Select(r => new SelectListItem
+                {
+                    Text = r.Name,
+                    Value = r.Id
+                }).ToList()
+            };
             return PartialView("_AddUser", model);
         }
 
@@ -136,12 +138,14 @@ namespace AdminPanel.Controllers
         [CommandName("User Edit")]
         public async Task<IActionResult> EditUser(string id)
         {
-            IdentityUserEditModel model = new IdentityUserEditModel();
-            model.ApplicationRoles = roleManager.Roles.Select(r => new SelectListItem
+            IdentityUserEditModel model = new IdentityUserEditModel
             {
-                Text = r.Name,
-                Value = r.Id
-            }).ToList();
+                ApplicationRoles = roleManager.Roles.Select(r => new SelectListItem
+                {
+                    Text = r.Name,
+                    Value = r.Id
+                }).ToList()
+            };
 
             if (!String.IsNullOrEmpty(id))
             {

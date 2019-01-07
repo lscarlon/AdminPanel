@@ -1,3 +1,115 @@
+10.6.0 / 2019-01-06
+==================
+* **New Feature:** Add new feature to persist the value after a refresh. See [Example 26](https://seiyria.com/bootstrap-slider/#example-26) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/905).
+* **Bug Fix:** Fix unit tests to execute event callbacks asynchronously. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/902).
+* **Documentation:** Add link to Angular Bootstrap-Slider project. [Commit](https://github.com/seiyria/bootstrap-slider/commit/4899ce155c419892573269b98084655de40b1893).
+
+10.5.0 / 2019-01-04
+==================
+* **New Feature:** Add lock to ticks feature. See [Example 25](https://seiyria.com/bootstrap-slider/#example-25) for a demonstration. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/744). Thanks to [Heidar](https://github.com/heidarsaleh).
+* **Bug Fix:** Fix mouseup event should trigger 'change' event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/900). Thanks to [Michael Kriese](https://github.com/ViceIce).
+* **Update Copyright:** Update Copyright year references to 2019. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/904).
+
+10.4.2 / 2018-12-18
+==================
+* **Bug Fix:** Fix 'change' event should trigger when either values change for range sliders. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/897). Thanks to [pimlie](https://github.com/pimlie).
+
+10.4.1 / 2018-12-18
+==================
+* **Bug Fix:** Remove unnecessary call to `parseFloat()`. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/892).
+* **Bug Fix:** Fix namespace handling. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/893).
+* **Bug Fix:** Fix tooltip when option is set to 'always'. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/895)
+* **Bug Fix:** Fixes Issue #884: Hovering over ticks displays the tick index. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/891)
+
+10.4.0 / 2018-12-12
+==================
+* **Minor API Update:** Update behaviour so that min/max tick values do not overwrite min/max settings. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/889).
+* **Bug Fix:** Remove unnecessary function calls. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/880).
+* **Bug Fix:** Fix calculation of percentage values. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/881).
+* **Bug Fix:** Recalculate the percentage on `mouseup` event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/825). Thanks to [purpose233](https://github.com/purpose233).
+
+10.3.4 / 2018-12-08
+==================
+* **Bug Fix:** Fix range slider values for `sliderStart` event. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/877).
+* **Bug Fix:** Properly check if slider values have changed. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/879).
+* **Bug Fix:** Correctly unset `aria-valuetext` attribute. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/885).
+* **Bug Fix:** Fix **Public Method** unit test. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/888). Thanks to [Xiaochen Wang](https://github.com/xwang345).
+* **Documentation Update:** Add a table of links for the Bootstrap-Slider API examples. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/886). Thanks to [Susan Truong](https://github.com/susantruong).
+
+10.3.3 / 2018-12-05
+==================
+* **Bug Fix:** Add `_copyState()` function to create a temporary copy of slider state. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/883).
+
+10.3.2 / 2018-11-28
+==================
+* **Bug Fix:** Allow range slider to snap to ticks within bounds. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/873). Thanks to [Michael Kriese](https://github.com/ViceIce).
+
+10.3.1 / 2018-11-24
+==================
+* **Bug Fix:** Check if `getComputedStyle()` returns `null`. Addresses issue with Firefox browsers running version < 62. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/869). Thanks to [Tyler Wilding](https://github.com/xTVaser).
+
+10.3.0 / 2018-11-24
+==================
+* **New Feature:** Add selection CSS classes to tick labels. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/752). Thanks to [Doug Lee](https://github.com/duggi).
+
+10.2.4 / 2018-11-24
+==================
+* **Bug Fix:** Remove duplicate call to `relayout()` in `_layout()` function. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/872).
+* **Documentation Fix:** Fix a typo in Example 14 on the API examples page. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/871).
+* **Documentation Fix:** Fix a typo in Example 1 on the API examples page. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/870).
+
+10.2.3 / 2018-11-05
+==================
+* **Bug Fix** Fixes an issue where sliding a min handle over the max handle causes a strange skip in the values. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/854). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
+
+10.2.2 / 2018-10-25
+==================
+* **Documentation Fix** Fix a typo to show tick position example correctly [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/866). Thanks [Jeffrey Espiritu](https://github.com/jespirit).
+
+10.2.1 / 2018-09-25
+==================
+* **Bug Fix** Hovering next to slider does not show the tooltip. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/858). Thanks to [Alexa Schlegel](https://github.com/aschle).
+
+10.2.0 / 2018-07-21
+==================
+* **New Feature** Show pointer cursor on slider ticks. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/849). Thanks to [Erik Demaine](https://github.com/edemaine).
+
+10.1.0 / 2018-07-21
+==================
+* **Bug Fix** Allow any value on logarithmic scale. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/836). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/835). Thanks to [James Mason](https://github.com/bear454).
+* **Documentation Fix:** Adds note about lack of current Bootstrap 4 compatability. [See here for further details](https://github.com/seiyria/bootstrap-slider/issues/689). Thanks to [Anders Olsson](https://github.com/anderso).
+* **Documentation Fix:** Increases clarity around when alternate namespace is bound. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/838). Thanks to [putrefactio](https://github.com/putrefactio).
+* **New Feature** Show pointer cursor on slider handle. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/839). Thanks to [David Lesieur](https://github.com/davidlesieur).
+
+
+10.0.2 / 2018-04-28
+==================
+* **Bug Fix** Fixes an issue when determining mouse coords when pageXOffset >= 0 . [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/828). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/594). Thanks to [x-yuri](https://github.com/x-yuri).
+
+10.0.1 / 2018-04-28
+==================
+* **Bug Fix** Fixing an issue where DOM elements were being selected on slide in FF and IE. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/829). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/746). Thanks to [Andreas Wulf](https://github.com/wulfsoft).
+
+10.0.0 / 2017-11-09
+==================
+* **Bug Fix** Refactoring tooltip CSS to use `transform` for positioning. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/798). Fixes [this bug](https://github.com/seiyria/bootstrap-slider/issues/483). Thanks to [wismill](https://github.com/wismill).
+
+9.10.0 / 2017-11-09
+==================
+* **Build pipeline change** Refactoring bootstrap files to come from `node_modules` instead of `dependencies` directory so latest changes are reflected. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/788). Thanks to [Sebastiaan ten Pas](https://github.com/patchman-sebastiaan).
+
+9.9.1 / 2017-11-09
+==================
+* **Bug Fix** LESS/CSS: Bug fix for mixin. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/789). Thanks to [Arman Poghosyan](https://github.com/armpogart).
+
+9.9.0 / 2017-09-23
+==================
+* **New Feature** LESS/CSS: refactor colors into variables file. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/779). Thanks to [Joseph Marikle](https://github.com/jmarikle).
+
+9.8.1 / 2017-07-06
+==================
+* **Bug Fix** Addresses issue where the max value calculation was wrong due to the cutoff when the `max` option value was not a multiple of the `step` option value. [See here for further details](https://github.com/seiyria/bootstrap-slider/pull/759). Thanks to [Thomas Haitzer](https://github.com/thaitzer).
+
 9.8.0 / 2017-04-24
 ==================
 * **New Feature:** Ability to add a custom class to the ranges of a slider with the `rangeHightlights` option specified. [See the PR for further details.](https://github.com/seiyria/bootstrap-slider/pull/742). Thanks to [jccode](https://github.com/jccode).

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<IdentityUserListViewModel>
 @using AdminPanel.Models
 
-    <!-- Content Header (Page header) -->
+<!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
         Application Users
@@ -24,7 +24,7 @@
                         <a id="createEditUserModal" data-toggle="modal" asp-action="AddUser" data-target="#modal-action-user" class="btn btn-primary">
                             <i class="glyphicon glyphicon-plus"></i>  Add User
                         </a>
-                    </div>  
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -77,9 +77,9 @@
 </section>
 <!-- /.content -->
 
-@Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium })
+<partial name="_Modal" model='new BootstrapModal { ID = "modal-action-user", AreaLabeledId = "modal-action-user-label", Size = ModalSize.Medium }' />
 
 @section scripts
-{
+    {
     <script src="~/js/IdentityUser-Index.js" asp-append-version="true"></script>
 }   
