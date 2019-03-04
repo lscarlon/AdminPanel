@@ -46,6 +46,14 @@
             }
         }
     }
+                <li id="left-sidebar-menu" title="SignOff">
+                    <a href="#" id="SignOutLink">
+                        <i class="glyphicon glyphicon-lock"></i> <span>Sign Out</span>
+                    </a>
+                    <form asp-area="" asp-controller="Login" asp-action="SignOff" method="post" id="logoutForm" style="display:none;">
+                        <button type="submit">Sign out</button>
+                    </form>
+                </li>               
 
 </ul>
 

@@ -44,7 +44,7 @@ namespace AdminPanel.Controllers
                 Id = u.Id,
                 Name = u.Name,
                 Email = u.Email,
-                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.First(ur => ur.UserId == u.Id).RoleId).Name
+                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.FirstOrDefault(ur => ur.UserId == u.Id).RoleId).Name
             }).ToList();
             if (!(filterRole is null)) {
                 model = model.Where(u => u.RoleName == filterRole).ToList();
@@ -68,7 +68,7 @@ namespace AdminPanel.Controllers
                 Id = u.Id,
                 Name = u.Name,
                 Email = u.Email,
-                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.First(ur => ur.UserId == u.Id).RoleId).Name
+                RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.FirstOrDefault(ur => ur.UserId == u.Id).RoleId).Name
             }).ToList();
             if (!(filterRole is null))
             {
@@ -154,7 +154,14 @@ namespace AdminPanel.Controllers
                 {
                     model.Name = user.Name;
                     model.Email = user.Email;
-                    model.ApplicationRoleId = roleManager.Roles.Single(r => r.Name == userManager.GetRolesAsync(user).Result.Single()).Id;
+                    string existingRole = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+                    if (existingRole != null)
+                    {
+                        model.ApplicationRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
+                    }
+                    else {
+                        model.ApplicationRoleId = null;
+                    }
                 }
             }
             return PartialView("_EditUser", model);
@@ -174,15 +181,20 @@ namespace AdminPanel.Controllers
                 {
                     user.Name = model.Name;
                     user.Email = model.Email;
-                    string existingRole = userManager.GetRolesAsync(user).Result.Single();
-                    string existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;
+                    string existingRole = userManager.GetRolesAsync(user).Result.FirstOrDefault();
+                    string existingRoleId = null;
+                    if (existingRole != null) {existingRoleId = roleManager.Roles.Single(r => r.Name == existingRole).Id;}
                     IdentityResult result = await userManager.UpdateAsync(user);
                     if (result.Succeeded)
                     {
                         if (existingRoleId != model.ApplicationRoleId)
                         {
-                            IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
-                            if (roleResult.Succeeded)
+                            bool roleResultSuccess = true;
+                            if (existingRoleId != null) {
+                                IdentityResult roleResult = await userManager.RemoveFromRoleAsync(user, existingRole);
+                                if (!roleResult.Succeeded) { roleResultSuccess = false; }
+                            }
+                            if (roleResultSuccess)
                             {
                                 Role applicationRole = await roleManager.FindByIdAsync(model.ApplicationRoleId);
                                 if (applicationRole != null)

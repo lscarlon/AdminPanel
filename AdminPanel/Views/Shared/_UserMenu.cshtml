@@ -1,11 +1,10 @@
-﻿﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @using AdminPanel.Models
 @using AdminPanel.Identity
 
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
-
 <!-- User Account: style can be found in dropdown.less -->
 <li class="dropdown user user-menu">
     @if (SignInManager.IsSignedIn(User))
@@ -26,13 +25,13 @@
             </li>
             <!-- Menu Body -->
             @*<li class="user-body">
-                <div class="row">
-                </div>
-            </li>*@
+                    <div class="row">
+                    </div>
+                </li>*@
             <!-- Menu Footer-->
             <li class="user-footer">
                 <div class="pull-left">
-                    @Html.ActionLink("Profile","Profile","IdentityUser", new {} , new { @class = "btn btn-default btn-flat" })
+                    @Html.ActionLink("Profile", "Profile", "IdentityUser", new { }, new { @class = "btn btn-default btn-flat" })
                 </div>
                 <div class="pull-right">
                     <form asp-area="" asp-controller="Login" asp-action="SignOff" method="post" id="logoutForm">
@@ -45,7 +44,7 @@
     }
     else
     {
-        <a asp-area="" asp-controller="Login" asp-action="Login" class="dropdown-toggle" >Log in</a>
-       
+        <a asp-area="" asp-controller="Login" asp-action="Login" class="dropdown-toggle">Log in</a>
+
     }
 </li>

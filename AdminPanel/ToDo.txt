@@ -1,7 +1,9 @@
-﻿Errore lista utenti per utente senza ruolo IdentityUserController riga 47 
+﻿* Errore lista utenti per utente senza ruolo 
 Eliminare la vecchia gestione del ControllerInfo
 Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default
 Role Claims
-Verificare e sistemare l'aggancio con bower e le cartelle js/css
+Verificare e sistemare l'aggancio con bower e le cartelle js/css (cartella dist bootstrap)
 Gestione custom degli errori anche 500 (vedi mancanza connessione db)
 Pubblicazione su IIS
+Mettere un log sulla pagina 404 per capire le pagine non trovate
+* LogOff come post dal menù

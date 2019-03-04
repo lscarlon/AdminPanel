@@ -1,7 +1,6 @@
-﻿﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Identity
 @using AdminPanel.Models
 @using AdminPanel.Identity
-
 
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
@@ -16,7 +15,7 @@
 
     <environment names="Development">
         <!-- Bootstrap 3.3.6 -->
-        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <!-- Ionicons -->
@@ -82,7 +81,7 @@
         <!-- Todo: Package all possible css into one file ->
 
         <!-- Bootstrap 3.3.6 -->
-        @*<link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css">*@
+        @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css">*@
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -365,7 +364,7 @@
                         </li>
                         <!-- User Account menu -->
                         @await Html.PartialAsync("_UserMenu")
-                        
+
                         <!-- Control Sidebar Toggle Button -->
                         <li>
                             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
@@ -389,26 +388,26 @@
                             <p>@UserManager.GetUserAsync(User).Result.Name</p>
                             <p><small>@UserManager.GetUserAsync(User).Result.Email.ToLower()</small></p>
                         </div>
-                    </div> 
+                    </div>
                 }
 
                 <!-- search form -->
                 @*<form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>*@
+                        <div class="input-group">
+                            <input type="text" name="q" class="form-control" placeholder="Search...">
+                            <span class="input-group-btn">
+                                <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>*@
                 <!-- /.search form -->
                 <!-- sidebar menu: : style can be found in sidebar.less -->
-                            
-                    @await Component.InvokeAsync("MenuNavigator")
-                    <vc:MenuNavigator></vc:MenuNavigator>
-                
+
+                @await Component.InvokeAsync("MenuNavigator")
+                <vc:MenuNavigator></vc:MenuNavigator>
+
             </section>
             <!-- /.sidebar -->
         </aside>
@@ -610,7 +609,7 @@
         <script data-pace-options='{ "ajax": false }' src="~/lib/plugins/pace/pace.min.js"></script>
 
         <!-- Bootstrap 3.3.6 -->
-        <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- Morris.js charts -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="~/lib/plugins/morris/morris.min.js"></script>
@@ -704,7 +703,7 @@
         <script data-pace-options='{ "ajax": false }' src="~/lib/plugins/pace/pace.js"></script>
 
         <!-- Bootstrap 3.3.6 -->
-        @*<script src="~/lib/bootstrap/js/bootstrap.min.js"></script>*@
+        @*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <!-- Morris.js charts -->
@@ -781,7 +780,7 @@
 
         <!-- UI JS file -->
         <script src="~/lib/photoswipe/dist/photoswipe-ui-default.min.js"></script>
-        
+
         <!-- jQuery.Redirect https://github.com/mgalante/jquery.redirect -->
         <script src="~/lib/jquery.redirect/jquery.redirect.js"></script>
 

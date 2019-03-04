@@ -73,4 +73,8 @@ $.getMultiScripts = function (arr, path) {
     }));
 
     return $.when.apply($, _arr);
-}
+};
+
+$('#SignOutLink').click(function () {
+    $('#logoutForm').submit();
+});
