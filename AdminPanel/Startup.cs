@@ -67,6 +67,12 @@ namespace AdminPanel
                 googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
 
+            //services.Configure<IISServerOptions>(options =>
+            //{
+            //    options.AutomaticAuthentication = false;
+            //    options.AuthenticationDisplayName = "AdminPanel";
+            //});
+
             services.Configure<IdentityOptions>(o =>
             {
                 // Password Settings
