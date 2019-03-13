@@ -34,11 +34,11 @@ namespace AdminPanel
             IEnumerable<Command> AppCommandsList =  asm.GetTypes()                                                              //   Lista delle action con CommandName
                 .Where(type => typeof(Controller).IsAssignableFrom(type))                                                       //seleziono i controller
                 .SelectMany(type => type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public))   //seleziono i loro metodi (Action)
-                .Where(m => m.CustomAttributes.Any(ca => ca.AttributeType.Name== "CommandNameAttribute"))                       //prendo solo quelli che hanno l'attributo che mi interessa
+                .Where(m => m.CustomAttributes.Any(ca => ca.AttributeType.Name== "CommandAuthorizeAttribute"))                       //prendo solo quelli che hanno l'attributo che mi interessa
                 .Select(c => new Command {                                                                                      //creo una lista di elementi di tipo Command 
                         Controller = c.DeclaringType.Name.Replace("Controller", ""),
                         Action = ActionName(c),
-                        CommandName = c.CustomAttributes.First(ca => ca.AttributeType.Name== "CommandNameAttribute").ConstructorArguments[0].Value.ToString()
+                        CommandName = c.CustomAttributes.First(ca => ca.AttributeType.Name== "CommandAuthorizeAttribute").ConstructorArguments[0].Value.ToString()
                     })
                 .Distinct();
 
@@ -64,7 +64,7 @@ namespace AdminPanel
             );
             db.SaveChanges();
             
-            Console.WriteLine("");
+            //Console.WriteLine("");
 
         }
 

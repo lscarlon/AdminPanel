@@ -27,7 +27,7 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
-        [CommandName("Homepage")]
+        [CommandAuthorize("Homepage")]
         public IActionResult Default(bool partial = false)
         {
             //foreach (Claim cl in User.Claims.ToList())

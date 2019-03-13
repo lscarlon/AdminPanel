@@ -1,23 +1,37 @@
-﻿<cache expires-sliding="@TimeSpan.FromMinutes(5)">
+﻿@*<cache expires-sliding="@TimeSpan.FromMinutes(5)">
     <html-extraction html-local-path="@System.IO.Path.Combine("wwwroot","dist","pages","index.html")"></html-extraction>
-</cache>
+</cache>*@
 @using System.Security.Claims
 @model List<Claim>
 
-@foreach (Claim cl in Model)
-{
-    <span>Issuer: @cl.Issuer</span><br />
-    <span>OriginalIssuer: @cl.OriginalIssuer</span><br />
-    @*<span>@cl.Properties.ToString()</span><br />
-    <span>@cl.Subject.ToString()</span><br />*@
-    <span>Type: @cl.Type</span><br />
-    <span>Value: @cl.Value</span><br />
-    <span>ValueType: @cl.ValueType</span><br />
-    <br /><span>-----------------------------</span><br />
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Homepage
+        <small>Default</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="glyphicon glyphicon-Home"></i> Home</a></li>
+        <li class="active">Home</li>
+    </ol>
+</section>
+
+<!-- Main content -->
+<section class="content">
+    @foreach (Claim cl in Model)
+    {
+        @*<span>Issuer: @cl.Issuer</span><br />
+            <span>OriginalIssuer: @cl.OriginalIssuer</span><br />
+            <span>@cl.Properties.ToString()</span><br />
+            <span>@cl.Subject.ToString()</span><br />*@
+        <span>Type: @cl.Type</span><br />
+        <span>Value: @cl.Value</span><br />
+        @*<span>ValueType: @cl.ValueType</span>*@
+        <span>-----------------------------</span><br />
 
 
-}
-
+    }
+</section>
 @section Scripts {
     <!-- This is needed for non partial rendering -->
 }

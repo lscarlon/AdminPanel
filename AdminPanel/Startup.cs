@@ -17,7 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
 using AdminPanel.Identity;
-
+using AdminPanel.Attributes;
 
 namespace AdminPanel
 {
@@ -67,12 +67,6 @@ namespace AdminPanel
                 googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
             });
 
-            //services.Configure<IISServerOptions>(options =>
-            //{
-            //    options.AutomaticAuthentication = false;
-            //    options.AuthenticationDisplayName = "AdminPanel";
-            //});
-
             services.Configure<IdentityOptions>(o =>
             {
                 // Password Settings
@@ -114,8 +108,7 @@ namespace AdminPanel
             services.AddDistributedMemoryCache();
             services.AddSession();
 
-            services.AddSingleton<IControllerInformationRepository, ControllerInformationRepository>();
-
+            services.AddSingleton<IAuthorizationPolicyProvider, CommandPolicyProvider>();
         }
 
         
