@@ -11,26 +11,19 @@ using AdminPanel.Models;
 namespace AdminPanel
 {
     //Metodi da chiamare in Program.cs - Main() per essere eseguiti all'avvio dell'applicazione
-    public class StartupMethods
+    public static class StartupMethods
     {
-        private readonly AppDbContext db;
-
-        public StartupMethods()
+        public static void RunAll()
         {
-            var Configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false)
-                .Build();
-            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            this.db = new AppDbContext(optionsBuilder.Options);
+            LoadCommands();
+            ClearClaims();
         }
-
+        
         // Carica sul database i comandi nella relativa tabella basandosi sul customAttribute CommandName
-        public void LoadCommands()
+        public static void LoadCommands()
         {
             Assembly asm = Assembly.GetExecutingAssembly();
-
+            AppDbContext db = Database.dbContext;
             IEnumerable<Command> AppCommandsList =  asm.GetTypes()                                                              //   Lista delle action con CommandName
                 .Where(type => typeof(Controller).IsAssignableFrom(type))                                                       //seleziono i controller
                 .SelectMany(type => type.GetMethods(BindingFlags.Instance | BindingFlags.DeclaredOnly | BindingFlags.Public))   //seleziono i loro metodi (Action)
@@ -68,8 +61,21 @@ namespace AdminPanel
 
         }
 
+        // Pulisce le tabelle AspNetRoleClaims e AspNetUserClaims eliminando i record con comandi non esistenti. Per i ruoli c'è la FK
+        public static void ClearClaims()
+        {
+            AppDbContext db = Database.dbContext;
+            db.RoleClaims.RemoveRange(
+                db.RoleClaims.Where(rc => 
+                                         rc.ClaimType == "CommandAuthorize" 
+                                         && !db.Commands.Any(c => c.CommandName == rc.ClaimValue))
+            );
+            db.SaveChanges();
+        }
+        
+
         // ritorna il nome della Action tenendo conto dell'attributo ActionName se presente
-        private string ActionName(MethodInfo action)
+        private static string ActionName(MethodInfo action)
         {
             var ActionNameAttribute = action.CustomAttributes.FirstOrDefault(ca => ca.AttributeType.Name == "ActionNameAttribute");
             if (ActionNameAttribute is null) {

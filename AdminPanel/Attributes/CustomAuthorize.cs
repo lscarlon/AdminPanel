@@ -1,8 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AdminPanel.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Threading.Tasks;
+using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace AdminPanel.Attributes
 {
@@ -41,6 +48,19 @@ namespace AdminPanel.Attributes
             }
 
             return Task.FromResult<AuthorizationPolicy>(null);
+        }
+    }
+
+    public static class CustomAuthorize
+    {
+        public static bool HasCommandClaim (this IPrincipal User, string Controller, string Action)
+        {
+            var claims = (ClaimsIdentity)User.Identity;
+
+            AppDbContext db = Database.dbContext;
+            string CommandName=db.Commands.FirstOrDefault(c => c.Controller == Controller && c.Action == Action).CommandName;
+
+            return claims.HasClaim("CommandAuthorize", CommandName);
         }
     }
 }

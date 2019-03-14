@@ -4,9 +4,11 @@
 * Nuova login Google
 * Eliminare la vecchia gestione del ControllerInfo
 * Role Claims
+* Fare un metodo HasPermission che controlla se si hanno i claim per una action in base all'attributo e ai claim per rendere invisibili i controlli non permessi
+* Pulire i claim allo start togliendo comandi e ruoli non esistenti
 
-
-Pulire i claim allo start togliendo comandi e ruoli non esistenti
+Disabilitare voci menu basate su claim
+Gestire non autorizzato in modal popup
 Spedire mail
 Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default
 Verificare e sistemare l'aggancio con bower e le cartelle js/css (cartella dist bootstrap)

@@ -148,6 +148,13 @@ namespace AdminPanel
             });
 
             app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
+
+            //Inizializzo la classe statica da usare per accesso al DB
+            var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
+            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            Database.InizializeDbContext(optionsBuilder);
+
+            StartupMethods.RunAll();
         }
     }
 }

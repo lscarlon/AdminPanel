@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<IdentityRoleListViewModel>
 @using AdminPanel.Models
+@using AdminPanel.Attributes
 @using System.Web
 
 <!-- Content Header (Page header) -->
@@ -56,13 +57,13 @@
                                                        class="btn btn-info btn-sm">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </a>
-                                                    @if (item.NumberOfUsers == 0)
-                                                    {
+                                                    @if (item.NumberOfUsers == 0 && @User.HasCommandClaim("IdentityRole", "DeleteApplicationRole"))
+                                                               {
                                                         <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
                                                            class="btn btn-danger btn-sm">
                                                             <i class="fa fa-trash"></i> Delete
                                                         </a>
-                                                    }
+                                                        }
                                                 </td>
                                             </tr>
                                         }

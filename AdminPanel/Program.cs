@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
+using AdminPanel.Models;
 
 namespace AdminPanel
 {
@@ -13,19 +15,22 @@ namespace AdminPanel
         public static void Main(string[] args)
         {
             var host = BuildWebHost(args);
-            StartupMethods obj = new StartupMethods();
-            obj.LoadCommands();
-            host.Run();
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var context = services.GetRequiredService<AppDbContext>();    
+            }
+            host.Run(); //esegue startup-Configure
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             //.UseIIS()
             .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup<Startup>()
+            .UseApplicationInsights()
+            .Build();
     }
 }
