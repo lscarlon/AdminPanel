@@ -1,97 +1,111 @@
 ﻿@using AdminPanel.Models
+@using AdminPanel.Attributes
 
 @model IEnumerable<Menu>
 
 @{
-    foreach (var menu in Model) {
+    foreach (var menu in Model)
+    {
         if ((Context.Request.Path + Context.Request.QueryString).ToLower() == menu.Href.ToLower())
-        { menu.Active = true; } else { menu.Active = false; }
-    } 
+        { menu.Active = true; }
+        else { menu.Active = false; }
+    }
 }
 
 <ul class="sidebar-menu tree" data-widget="tree">
-<li class="header">MENU PRINCIPALE</li>
+    <li class="header">MENU PRINCIPALE</li>
     @if (Model != null)
     {
         @foreach (var firstLevel in Model.Where(m => m.Parent is null).OrderBy(m => m.DisplayOrder))
         {
-            if (!Model.Any(m => m.Parent == firstLevel))  //menu non ha figli
+            if (!Model.Any(m => m.Parent == firstLevel) && @User.HasCommandClaim(firstLevel.Controller, firstLevel.Action))  //menu non ha figli
             {
-                <li id="left-sidebar-menu" title="@firstLevel.DisplayName" scriptToRun="@(firstLevel.ScriptAfterPartialView)"
-                    class="@if (firstLevel.Active) {<text>active</text> }">
-                    <a href="@(firstLevel.Href)">
-                        <i class="@(firstLevel.DisplayImage)"></i> <span>@firstLevel.DisplayName</span>
-                    </a>
-                </li>
+                    <li id="left-sidebar-menu" title="@firstLevel.DisplayName" scriptToRun="@(firstLevel.ScriptAfterPartialView)"
+                        class="@if (firstLevel.Active)
+                        {<text>active</text> }">
+                        <a href="@(firstLevel.Href)">
+                            <i class="@(firstLevel.DisplayImage)"></i> <span>@firstLevel.DisplayName</span>
+                        </a>
+                    </li>
             }
             else
             {
-                <li class="treeview @if (Model.Where(m => m.Parent == firstLevel).Any(m => m.Active)) { <text>active menu-open</text> }">
-                    <a href="#">
-                        <i class="@(firstLevel.DisplayImage)"></i>
-                        <span>@firstLevel.DisplayName</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu" style="display: @if (Model.Where(m => m.Parent == firstLevel).Any(m => m.Active)) {<text>block</text> } else {<text>none</text> };">
-                        @foreach (var menu in Model.Where(m => m.Parent == firstLevel).OrderBy(m => m.DisplayOrder))
-                        {
-                            <li class="@if (menu.Active) {<text>active</text> }">
-                                <a href="@(menu.Href)"><i class="@(menu.DisplayImage)"></i> @menu.DisplayName</a>
-                            </li>
-                        }
-                    </ul>
-                </li>
+                @if (Model.Any(m => m.Parent == firstLevel && @User.HasCommandClaim(m.Controller, m.Action)))
+                {
+                    <li class="treeview @if (Model.Where(m => m.Parent == firstLevel).Any(m => m.Active))
+                    { <text>active menu-open</text> }">
+                        <a href="#">
+                            <i class="@(firstLevel.DisplayImage)"></i>
+                            <span>@firstLevel.DisplayName</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu" style="display: @if (Model.Where(m => m.Parent == firstLevel).Any(m => m.Active))
+                        {<text>block</text> }
+                        else
+                        {<text>none</text> };">
+                            @foreach (var menu in Model.Where(m => m.Parent == firstLevel).OrderBy(m => m.DisplayOrder))
+                            {
+                                @if (@User.HasCommandClaim(menu.Controller, menu.Action))
+                                {
+                                    <li class="@if (menu.Active)
+                                    {<text>active</text> }">
+                                        <a href="@(menu.Href)"><i class="@(menu.DisplayImage)"></i> @menu.DisplayName</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </li>
+                }
             }
         }
+        <li id="left-sidebar-menu" title="SignOff">
+            <a href="#" id="SignOutLink">
+                <i class="glyphicon glyphicon-lock"></i> <span>Sign Out</span>
+            </a>
+            <form asp-area="" asp-controller="Login" asp-action="SignOff" method="post" id="logoutForm" style="display:none;">
+                <button type="submit">Sign out</button>
+            </form>
+        </li>
     }
-                <li id="left-sidebar-menu" title="SignOff">
-                    <a href="#" id="SignOutLink">
-                        <i class="glyphicon glyphicon-lock"></i> <span>Sign Out</span>
-                    </a>
-                    <form asp-area="" asp-controller="Login" asp-action="SignOff" method="post" id="logoutForm" style="display:none;">
-                        <button type="submit">Sign out</button>
-                    </form>
-                </li>               
-
-</ul>
+    </ul>
 
 
 
 
-    @*<li class="treeview menu-open">
-            <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu" style="display: block;">
-                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-            </ul>
-        </li>*@
+@*<li class="treeview menu-open">
+        <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>UI Elements</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu" style="display: block;">
+            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+            <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+        </ul>
+    </li>*@
 
-    @*<li class="treeview">
-            <a href="#">
-                <i class="fa fa-laptop"></i>
-                <span>UI Elements</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu" style="display: none;">
-                <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-                <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-                <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-                <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-                <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-                <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-            </ul>
-        </li>*@
+@*<li class="treeview">
+        <a href="#">
+            <i class="fa fa-laptop"></i>
+            <span>UI Elements</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        <ul class="treeview-menu" style="display: none;">
+            <li><a href="pages/UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
+            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
+            <li><a href="pages/UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
+            <li><a href="pages/UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
+            <li><a href="pages/UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
+            <li><a href="pages/UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
+        </ul>
+    </li>*@

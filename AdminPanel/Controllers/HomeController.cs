@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using AdminPanel.Attributes;
 using AdminPanel.Identity;
 using AdminPanel.Common;
-
+using Microsoft.Extensions.DependencyInjection;
 
 namespace AdminPanel.Controllers
 {
@@ -39,6 +39,20 @@ namespace AdminPanel.Controllers
                 return PartialView();
             else
                 return View(User.Claims.ToList());
+        }
+
+        public IActionResult Test( [FromServices] IEmailService smtpClient, bool partial = false)
+        {
+            string response;
+            EmailMessage emailMessage = new EmailMessage { 
+                FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },    
+                Subject="Oggetto",
+                Content="Messaggio di prova"
+            };
+            emailMessage.ToAddresses.Add(new EmailAddress { Name = "Luigi Carlone", Address = "l.carlone@dpssrl.com" });
+
+            if (!smtpClient.Send(emailMessage, out response)) ViewBag.Response = response;
+            return RedirectToAction("Default");
         }
 
     }

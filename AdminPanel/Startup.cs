@@ -18,6 +18,7 @@ using Microsoft.Extensions.Logging;
 using AdminPanel.Models;
 using AdminPanel.Identity;
 using AdminPanel.Attributes;
+using AdminPanel.Common;
 
 namespace AdminPanel
 {
@@ -109,6 +110,9 @@ namespace AdminPanel
             services.AddSession();
 
             services.AddSingleton<IAuthorizationPolicyProvider, CommandPolicyProvider>();
+
+            services.AddSingleton<IEmailSettings>(Configuration.GetSection("EmailSettings").Get<EmailSettings>());
+            services.AddTransient<IEmailService, EmailService>();
         }
 
         
