@@ -9,6 +9,7 @@ using AdminPanel.Attributes;
 using AdminPanel.Models;
 using AdminPanel.Identity;
 using AdminPanel.Common;
+using Z.EntityFramework.Plus;
 
 namespace AdminPanel.Controllers
 {
@@ -127,6 +128,88 @@ namespace AdminPanel.Controllers
                 }
             }
             return View();
+        }
+
+        [HttpGet]
+        [ScriptAfterPartialView("")]
+        [CommandAuthorize("Role Permission")]
+        public async Task<IActionResult> EditRoleClaim(string id)
+        {
+            List<IdentityRoleClaimViewModel> model = new List<IdentityRoleClaimViewModel>();
+        
+            if (!String.IsNullOrEmpty(id))
+            {
+                Role applicationRole = await roleManager.FindByIdAsync(id);
+                if (applicationRole == null)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ViewData["Role"] =applicationRole;
+                    model = db.Commands
+                            .GroupJoin(
+                                db.Menus
+                                .Where(m => m.Controller != null && m.DisplayOrder >= 0)
+                                .GroupBy(m => m.Controller)
+                                .Select(m => new
+                                {
+                                    Controller = m.Key,
+                                    DisplayOrder = m.Min(mm => mm.DisplayOrder)
+                                })
+                                , c => c.Controller, m => m.Controller,
+                                (c, m) => new { c.Controller, c.CommandName, DisplayOrder = (int?)m.FirstOrDefault().DisplayOrder }
+                            )
+                            .GroupJoin(
+                                db.RoleClaims
+                                .Where(c => c.ClaimType == "CommandAuthorize" && c.RoleId == applicationRole.Id)
+                                .Select(c => new
+                                {
+                                    c.ClaimValue,
+                                    c.RoleId
+                                })
+                                , c => c.CommandName, cl => cl.ClaimValue,
+                                (c, cl) => new IdentityRoleClaimViewModel
+                                {
+                                    Controller = c.Controller,
+                                    CommandName = c.CommandName,
+                                    DisplayOrder = c.DisplayOrder.HasValue ? c.DisplayOrder : int.MaxValue,
+                                    Checked = cl.FirstOrDefault().RoleId != null ? true : false
+                                }
+                            )
+                            .OrderBy(c => c.DisplayOrder)
+                            .ThenBy(c => c.Controller)
+                            .ToList();
+                }
+            }
+            return PartialView("_EditRoleClaim", model);
+        }
+
+        [HttpPost]
+        [ScriptAfterPartialView("")]
+        [CommandAuthorize("Role Permission")]
+        public async Task<IActionResult> EditRoleClaim(string id, List<IdentityRoleClaimViewModel> model)
+        {
+            if (ModelState.IsValid && !String.IsNullOrEmpty(id))
+            {
+                Role applicationRole = await roleManager.FindByIdAsync(id);
+                db.RoleClaims.Where(rc =>
+                                         rc.ClaimType == "CommandAuthorize"
+                                         && rc.RoleId == id)
+                                    .Delete();
+                db.RoleClaims.AddRange(  model.
+                                         Where(rc => rc.Checked == true).
+                                         Select(rc => new IdentityRoleClaim<string>
+                                         {
+                                             RoleId = id,
+                                             ClaimType = "CommandAuthorize",
+                                             ClaimValue = rc.CommandName
+                                         }).ToList()
+                                     );
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(model);
         }
     }
 }

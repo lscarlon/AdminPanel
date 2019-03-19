@@ -8,8 +8,9 @@
 * Pulire i claim allo start togliendo comandi e ruoli non esistenti
 * Disabilitare voci menu basate su claim
 * Spedire mail
+* Gestione Claim da GUI
 
-Gestione Claim da URL
+Capire meglio esecuzione JS su partialView
 Gestire non autorizzato in modal popup
 Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default
 Reset password utente da dentro e con mail
@@ -24,3 +25,7 @@ Evitare StartUpMethods.RunAll ogni volta (basato su dataora compilazione e valor
 Pulire tutti i js importati senza motivo
 
 Vedere questo https://www.mailgun.com/email-api
+
+
+
+

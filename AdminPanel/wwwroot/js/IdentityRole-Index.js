@@ -28,4 +28,5 @@ $(document).ready(function () {
             $.redirect('../identityuser/index', { 'filterRole': data[0] });
         }
     });
+    
 });

@@ -82,7 +82,12 @@ namespace AdminPanel.Models
 
         [Display(Name = "Full Name")]
         public string Name { get; set; }
-
-
+    }
+    public class IdentityRoleClaimViewModel
+    {
+        public string Controller { get; set; }
+        public string CommandName { get; set; }
+        public int? DisplayOrder { get; set; }
+        public bool Checked { get; set; }
     }
 }

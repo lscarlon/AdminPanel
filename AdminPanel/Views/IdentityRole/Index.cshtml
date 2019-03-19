@@ -57,13 +57,20 @@
                                                        class="btn btn-info btn-sm">
                                                         <i class="fa fa-edit"></i> Edit
                                                     </a>
+                                                    @if (@User.HasCommandClaim("IdentityRole", "EditRoleClaim"))
+                                                    {
+                                                        <a id="ApplicationRoleModal" data-toggle="modal" asp-action="EditRoleClaim" asp-route-id="@item.Id" data-target="#modal-action-application-role"
+                                                           class="btn btn-warning btn-sm">
+                                                            <i class="fa fa-shield"></i> Permission
+                                                        </a>
+                                                    }
                                                     @if (item.NumberOfUsers == 0 && @User.HasCommandClaim("IdentityRole", "DeleteApplicationRole"))
-                                                               {
+                                                    {
                                                         <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
                                                            class="btn btn-danger btn-sm">
                                                             <i class="fa fa-trash"></i> Delete
                                                         </a>
-                                                        }
+                                                    }
                                                 </td>
                                             </tr>
                                         }

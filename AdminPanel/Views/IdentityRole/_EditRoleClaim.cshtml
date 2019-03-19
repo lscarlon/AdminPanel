@@ -1,0 +1,39 @@
+﻿@model IList<AdminPanel.Models.IdentityRoleClaimViewModel>
+@using AdminPanel.Models
+@using AdminPanel.Identity
+@{
+    var role = (Role)ViewData["Role"];
+}
+
+<form asp-action="EditRoleClaim" role="form">
+    @await Html.PartialAsync("_ModalHeader", new ModalHeader { Heading = $"Edit permission for role:  {role.Name}" })
+    <div class="modal-body form-horizontal">
+        <div class="row">
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                <div class="form-group" style="margin-bottom:5px;">
+
+                    <label asp-for="@Model[i].Checked" class="col-lg-3 col-sm-3 control-label">
+                        <input asp-for="@Model[i].Checked" @(Model[i].Checked?"checked":"") />
+                    </label>
+                    <label class="col-lg-6 form-control-static">
+                        @(Model[i].Controller) --  @(Model[i].CommandName)
+                    </label>
+                    <input type="hidden" asp-for="@Model[i].Controller" />
+                    <input type="hidden" asp-for="@Model[i].CommandName" />
+                </div>
+            }
+
+        </div>
+    </div>
+        @await Html.PartialAsync("_ModalFooter", new ModalFooter { })
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+            $('input[type="checkbox"]').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+    });
+</script>
