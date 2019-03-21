@@ -9,12 +9,16 @@
 * Disabilitare voci menu basate su claim
 * Spedire mail
 * Gestione Claim da GUI
+* Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default (Gestita con "senza ruolo" ma homepage senza command)
+* Verifica email nuovo utente
 
-Capire meglio esecuzione JS su partialView
-Gestire non autorizzato in modal popup
-Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default
+
+Gestire gli errori di registrazione
 Reset password utente da dentro e con mail
 Breadcrumb automatico da menu
+Pulire tutti i js importati senza motivo
+Capire meglio esecuzione JS su partialView
+Gestire non autorizzato in modal popup
 Verificare e sistemare l'aggancio con bower e le cartelle js/css (cartella dist bootstrap)
 Mettere un log sulla pagina 404 per capire le pagine non trovate
 Pagina 401 access denied
@@ -22,7 +26,7 @@ Gestione custom degli errori anche 500 (vedi mancanza connessione db)
 Gestione centralizzata degli errori
 Pagina 404 con layout non autenticato
 Evitare StartUpMethods.RunAll ogni volta (basato su dataora compilazione e valore su db?)
-Pulire tutti i js importati senza motivo
+Nella Home, se non ho gruppo dire che ci si deve far autorizzare
 
 Vedere questo https://www.mailgun.com/email-api
 

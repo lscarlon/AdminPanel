@@ -22,11 +22,11 @@
 $(document).ready(function () {
     var table = $('#tb_users').DataTable();
 
-    $('#tb_users tbody').on('click', 'td', function () {
-        var data = table.row($(this).parents('tr')).data();
-        if ($(this).closest('table').find('th').eq($(this).index())["0"].innerHTML !== "Action") {
-            //alert('You clicked on ' + data[1] + '\'s row');
-            $.redirect('../identityrole/index', { 'filterUser': data[0] });
-        }
-    });
+    //$('#tb_users tbody').on('click', 'td', function () {
+    //    var data = table.row($(this).parents('tr')).data();
+    //    if ($(this).closest('table').find('th').eq($(this).index())["0"].innerHTML !== "Action") {
+    //        //alert('You clicked on ' + data[1] + '\'s row');
+    //        $.redirect('../IdentityRole/Index', { 'filterUser': data[0] });
+    //    }
+    //});
 });

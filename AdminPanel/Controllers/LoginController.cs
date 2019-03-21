@@ -11,6 +11,7 @@ using AdminPanel.Models;
 using AdminPanel.Common;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
+using System.Text.Encodings.Web;
 
 namespace AdminPanel.Controllers
 {
@@ -29,9 +30,10 @@ namespace AdminPanel.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string returnUrl = null, string UserName=null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            ViewData["UserName"] = UserName;
             return View();
         }
 
@@ -77,7 +79,7 @@ namespace AdminPanel.Controllers
                 ModelState.AddModelError(string.Empty, $"Error from external provider: {remoteError}");
                 return View(nameof(Login));
             }
-            
+
             var info = await signInManager.GetExternalLoginInfoAsync();
             if (info == null)
                 return RedirectToAction(nameof(Login));
@@ -91,7 +93,7 @@ namespace AdminPanel.Controllers
             }
             if (result.IsLockedOut)
                 return View("Lockout");
-            
+
             // If the user does not have an account, then ask the user to create an account.
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["LoginProvider"] = info.LoginProvider;
@@ -126,14 +128,16 @@ namespace AdminPanel.Controllers
                     //return View("ExternalLoginFailure");
                 }
                 var user = new User
-                    {
-                        Name = model.Name,
-                        UserName = model.UserName,
-                        Email = model.Email
-                    };
+                {
+                    Name = model.Name,
+                    UserName = model.UserName,
+                    Email = model.Email
+                };
                 var result = await userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    // Email confermata di default per i login esterni
+                    user.EmailConfirmed = true;
                     result = await userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
                     {
@@ -141,7 +145,7 @@ namespace AdminPanel.Controllers
                         return RedirectToLocal(returnUrl);
                     }
                 }
-                
+
             }
 
             ViewBag.ReturnUrl = returnUrl;
@@ -181,9 +185,80 @@ namespace AdminPanel.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet]
         public IActionResult Register()
         {
             return View();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([FromServices] IEmailService smtpClient, IdentityRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Password == model.RetypePassword && model.TermsAccepted)
+                {
+                    var user = new User()
+                    {
+                        Name = model.Name,
+                        UserName = model.UserName,
+                        Email = model.Email
+                    };
+                    IdentityResult result = await userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                        var callBackUrl = Url.Action(
+                            "ConfirmEmail","Login",
+                            values: new { userId = user.Id, code },
+                            protocol: Request.Scheme);
+
+                        EmailMessage emailMessage = new EmailMessage
+                        {
+                            FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },
+                            Subject = "Confirm your email",
+                            Content = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>."
+                        };
+                        emailMessage.ToAddresses.Add(new EmailAddress { Name = user.Name, Address = user.Email });
+                        smtpClient.Send(emailMessage, out string response);
+
+                        //await signInManager.SignInAsync(user, isPersistent: false);
+                        //return RedirectToLocal(null);
+                        return RedirectToAction("Login");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Register Error");
+                        return View(model);
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Password mismatch or Terms not accepted");
+                    return View(model);
+                }
+            }
+
+            return View(model);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId != null && code != null)
+            {
+                var user = await userManager.FindByIdAsync(userId);
+                IdentityResult result = await userManager.ConfirmEmailAsync(user, code);
+                if (result.Succeeded)
+                {
+                    ViewBag.UserName = user.UserName;
+                    return View("ConfirmEmail");
+                }
+            }
+            return RedirectToAction("Login");
         }
     }
 }

@@ -70,6 +70,30 @@ namespace AdminPanel.Models
         public bool RememberMe { get; set; }
     }
 
+    public class IdentityRegisterViewModel
+    {
+        [Required]
+        public string Name { get; set; }
+
+        [Required]
+        public string UserName { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string RetypePassword { get; set; }
+
+        [Required]
+        [Display(Name = "Accept Terms")]
+        public bool TermsAccepted { get; set; }
+    }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

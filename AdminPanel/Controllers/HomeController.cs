@@ -27,14 +27,10 @@ namespace AdminPanel.Controllers
         [DisplayActionMenu]
         [DisplayImage("fa fa-circle-o")]
         [ScriptAfterPartialView("")]
-        [CommandAuthorize("Homepage")]
+        //[CommandAuthorize("Homepage")]
         public IActionResult Default(bool partial = false)
         {
-            //foreach (Claim cl in User.Claims.ToList())
-            //{
-            //    ViewBag
-            //}
-
+           
             if (partial)
                 return PartialView();
             else

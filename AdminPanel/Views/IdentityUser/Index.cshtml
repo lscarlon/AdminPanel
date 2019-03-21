@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<IdentityUserListViewModel>
 @using AdminPanel.Models
+@using AdminPanel.Attributes
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -50,14 +51,18 @@
                                                 <td>@item.Email</td>
                                                 <td>@item.RoleName</td>
                                                 <td>
-                                                    <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
-                                                       class="btn btn-info btn-sm">
-                                                        <i class="fa fa-edit"></i>  Edit
-                                                    </a>
-                                                    <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user"
-                                                       class="btn btn-danger btn-sm">
-                                                        <i class="fa fa-trash"></i>  Delete
-                                                    </a>
+                                                    @if (@User.HasCommandClaim("IdentityUser", "EditUser"))
+                                                    {
+                                                        <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                                           class="btn btn-info btn-sm">
+                                                            <i class="fa fa-edit"></i>  Edit
+                                                        </a>}
+                                                    @if (@User.HasCommandClaim("IdentityUser", "DeleteUser"))
+                                                    {
+                                                        <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                                           class="btn btn-danger btn-sm">
+                                                            <i class="fa fa-trash"></i>  Delete
+                                                        </a>}
                                                 </td>
                                             </tr>
                                         }

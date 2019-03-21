@@ -32,7 +32,7 @@ namespace AdminPanel.Controllers
         [DisplayImage("glyphicon glyphicon-user")]
         [ScriptAfterPartialView("/js/IdentityRole-Index.js")]
         [CommandAuthorize("Role List")]
-        public IActionResult Index(bool partial = false)
+        public IActionResult Index(string filterUser, bool partial = false)
         {
             List<IdentityRoleListViewModel> model = new List<IdentityRoleListViewModel>();
             model = roleManager.Roles.Select(r => new IdentityRoleListViewModel
@@ -42,6 +42,9 @@ namespace AdminPanel.Controllers
                 Description = r.Description,
                 NumberOfUsers = db.UserRoles.Where(ur => ur.RoleId == r.Id).Count()
             }).ToList();
+            if (!(filterUser is null))
+            { }
+                
             if (partial)
                 return PartialView(model);
             else

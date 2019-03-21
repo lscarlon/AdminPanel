@@ -1,0 +1,16 @@
+﻿
+<div class="register-box-body">
+    <p class="login-box-msg">Email confirmation</p>
+    <form asp-controller="Login" asp-action="Login" method="get" class="form-horizontal" role="form">
+        <input name="UserName" type="hidden" value="@ViewBag.UserName" />
+        <p class="text-info">
+            You've successfully confirmed your email address.
+            You can now login to the system
+        </p>
+        <div class="row">
+            <div class="col-xs-4">
+                <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
+            </div>
+        </div>
+    </form>
+</div>

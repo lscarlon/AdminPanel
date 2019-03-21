@@ -84,6 +84,7 @@ namespace AdminPanel
 
                 // User settings
                 o.User.RequireUniqueEmail = true;
+                o.SignIn.RequireConfirmedEmail = true;
             });
 
             services.ConfigureApplicationCookie(o => {

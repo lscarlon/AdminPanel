@@ -53,14 +53,19 @@ namespace AdminPanel.Attributes
 
     public static class CustomAuthorize
     {
-        public static bool HasCommandClaim (this IPrincipal User, string Controller, string Action)
+        public static bool HasCommandClaim(this IPrincipal User, string Controller, string Action)
         {
             var claims = (ClaimsIdentity)User.Identity;
 
             AppDbContext db = Database.dbContext;
-            string CommandName=db.Commands.FirstOrDefault(c => c.Controller == Controller && c.Action == Action).CommandName;
+            Command command = db.Commands.FirstOrDefault(c => c.Controller == Controller && c.Action == Action);
+            if (command == null) { return true; } // se il comando cercato non esiste è come se tutti avessero il permesso/claim
+            else
+            {
+                string CommandName = command.CommandName;
 
-            return claims.HasClaim("CommandAuthorize", CommandName);
+                return claims.HasClaim("CommandAuthorize", CommandName);
+            }
         }
     }
 }
