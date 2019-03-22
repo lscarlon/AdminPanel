@@ -72,7 +72,7 @@ namespace AdminPanel.Controllers
             }).ToList();
             if (!(filterRole is null))
             {
-                model = model.Where(u => db.UserRoles.First(ur => ur.UserId == u.Id).RoleId == filterRole).ToList();
+                model = model.Where(u => u.RoleName ==  db.Roles.FirstOrDefault(r => r.Id==filterRole).Name).ToList();
             }
             //ViewData["DebugMessage"] = filterRole;
             if (partial)

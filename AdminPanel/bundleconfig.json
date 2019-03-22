@@ -9,6 +9,12 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/AdminTheme/css/AdminLTE.min.css",
+    "inputFiles": [
+      "wwwroot/AdminTheme/css/AdminLTE.css"
+    ]
+  },
+  {
     "outputFileName": "wwwroot/js/site.min.js",
     "inputFiles": [
       "wwwroot/js/site.js"

@@ -1,5 +1,4 @@
 ﻿
-
 //TODO: Refactor to simplify
 $("li[id^='left-sidebar-menu']").on("click", function () {
     var $this = $(this);

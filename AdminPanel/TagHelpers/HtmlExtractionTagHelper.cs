@@ -78,7 +78,7 @@ namespace AdminPanel.TagHelpers
                     .Single();
 
                     //Make this configurable.
-                    var content = p.InnerHtml; //.Replace("dist/img/", "/lib/AdminLTE-2.3.11/dist/img/");
+                    var content = p.InnerHtml; //.Replace("AdminTheme/img/", "/lib/AdminLTE-2.3.11/AdminTheme/img/");
                   
                     if (!String.IsNullOrEmpty(HtmlReplacement))
                     {

@@ -61,7 +61,7 @@
                                                     {
                                                         <a id="ApplicationRoleModal" data-toggle="modal" asp-action="EditRoleClaim" asp-route-id="@item.Id" data-target="#modal-action-application-role"
                                                            class="btn btn-warning btn-sm">
-                                                            <i class="fa fa-shield"></i> Permission
+                                                            <i class="fa fa-user-shield"></i> Permission
                                                         </a>
                                                     }
                                                     @if (item.NumberOfUsers == 0 && @User.HasCommandClaim("IdentityRole", "DeleteApplicationRole"))

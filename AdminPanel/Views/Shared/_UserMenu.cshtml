@@ -11,13 +11,13 @@
     {
 
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="~/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            <img src="~/AdminTheme/img/user2-160x160.jpg" class="user-image" alt="User Image">
             <span class="hidden-xs">@UserManager.GetUserAsync(User).Result.Name</span>
         </a>
         <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-                <img src="~/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="~/AdminTheme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                 <p>
                     @UserManager.GetUserAsync(User).Result.Name
                     <small>@UserManager.GetUserAsync(User).Result.Email.ToLower()</small>

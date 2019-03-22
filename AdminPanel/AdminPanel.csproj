@@ -52,105 +52,109 @@
     <None Include="Common\CustomController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\aero%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\aero@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\blue%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\blue@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\flat%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\flat@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\green%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\green@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\grey%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\grey@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\orange%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\orange@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\pink%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\pink@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\purple%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\purple@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\red%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\red@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\flat\yellow%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\flat\yellow@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\futurico\futurico%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\futurico\futurico@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\line\line%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\line\line@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\aero%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\aero@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\blue%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\blue@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\green%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\green@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\grey%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\grey@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\minimal%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\minimal@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\orange%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\orange@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\pink%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\pink@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\purple%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\purple@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\red%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\red@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\minimal\yellow%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\minimal\yellow@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\polaris\polaris%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\polaris\polaris@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\aero%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\aero@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\blue%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\blue@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\green%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\green@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\grey%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\grey@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\orange%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\orange@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\pink%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\pink@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\purple%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\purple@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\red%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\red@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\square%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\square@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
-    <Content Update="wwwroot\lib\plugins\iCheck\square\yellow%402x.png">
+    <Content Update="wwwroot\modules\plugins\iCheck\square\yellow@2x.png">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewComponents\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

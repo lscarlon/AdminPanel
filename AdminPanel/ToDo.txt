@@ -1,22 +1,9 @@
-﻿* Errore lista utenti per utente senza ruolo 
-* Pubblicazione su IIS (con fatica! attenzione a usersecrets e .net core hosting bundle)
-* LogOff come post dal menù
-* Nuova login Google
-* Eliminare la vecchia gestione del ControllerInfo
-* Role Claims
-* Fare un metodo HasPermission che controlla se si hanno i claim per una action in base all'attributo e ai claim per rendere invisibili i controlli non permessi
-* Pulire i claim allo start togliendo comandi e ruoli non esistenti
-* Disabilitare voci menu basate su claim
-* Spedire mail
-* Gestione Claim da GUI
-* Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default (Gestita con "senza ruolo" ma homepage senza command)
-* Verifica email nuovo utente
-
-
+﻿BUG: lista ruoli clicco riga dopo riordinamento griglia
+Messaggio all'invio della mail "devi confermare la mail"
 Gestire gli errori di registrazione
 Reset password utente da dentro e con mail
 Breadcrumb automatico da menu
-Pulire tutti i js importati senza motivo
+
 Capire meglio esecuzione JS su partialView
 Gestire non autorizzato in modal popup
 Verificare e sistemare l'aggancio con bower e le cartelle js/css (cartella dist bootstrap)
@@ -30,6 +17,21 @@ Nella Home, se non ho gruppo dire che ci si deve far autorizzare
 
 Vedere questo https://www.mailgun.com/email-api
 
+*************************************************************
+* Errore lista utenti per utente senza ruolo 
+* Pubblicazione su IIS (con fatica! attenzione a usersecrets e .net core hosting bundle)
+* LogOff come post dal menù
+* Nuova login Google
+* Eliminare la vecchia gestione del ControllerInfo
+* Role Claims
+* Fare un metodo HasPermission che controlla se si hanno i claim per una action in base all'attributo e ai claim per rendere invisibili i controlli non permessi
+* Pulire i claim allo start togliendo comandi e ruoli non esistenti
+* Disabilitare voci menu basate su claim
+* Spedire mail
+* Gestione Claim da GUI
+* Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default (Gestita con "senza ruolo" ma homepage senza command)
+* Verifica email nuovo utente
+* Pulire tutti i js importati senza motivo (rimosso bower e fatta pulizia di quello che non uso)
 
 
 
