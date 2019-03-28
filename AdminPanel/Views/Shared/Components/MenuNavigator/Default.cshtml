@@ -50,7 +50,7 @@
                                 @if (@User.HasCommandClaim(menu.Controller, menu.Action))
                                 {
                                     <li class="@if (menu.Active)
-                                    {<text>active</text> }">
+                                    {<text>active</text> }" scriptToRun="@(menu.ScriptAfterPartialView)">
                                         <a href="@(menu.Href)"><i class="@(menu.DisplayImage)"></i> @menu.DisplayName</a>
                                     </li>
                                 }

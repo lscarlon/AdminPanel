@@ -1,32 +1,27 @@
 ﻿(function ($) {
-    function ApplicationRole() {
-        var $this = this;
-
-        function initilizeModel() {
-            $("#modal-action-application-role").on('loaded.bs.modal', function (e) {
-
-            }).on('hidden.bs.modal', function (e) {
-                $(this).removeData('bs.modal');
-            });
-        }
-        $this.init = function () {
-            initilizeModel();
-        }
-    }
     $(function () {
-        var self = new ApplicationRole();
-        self.init();
+        $("#modal-action-application-role")
+            //.on('loaded.bs.modal', function (e) {
+            //})
+            //.on('show.bs.modal', function (e) {
+            //})
+            .on('hidden.bs.modal', function (e) {
+                $(this).removeData('bs.modal');
+                $(this).find('.modal-content').empty();
+            });
     })
-}(jQuery))  
+}(jQuery))
 
 $(document).ready(function () {
-    var table = $('#tb_roles').DataTable();
+    var table = $('#tb_roles').DataTable({
+        'autoWidth': false
+    });
 
     $('#tb_roles tbody').on('click', 'td', function () {
         var data = table.row($(this).parents('tr')).data();
         if ($(this).closest('table').find('th').eq($(this).index())["0"].innerHTML !== "Action") {
-            $.redirect('../identityuser/index', { 'filterRole': data[0] });
+            $.loadPartialWithScripts("/identityuser/index?filterRole=" + data[0], "/js/IdentityUser-Index.js");
         }
     });
-    
+
 });

@@ -22,6 +22,8 @@ namespace AdminPanel.Models
                     case ModalSize.Large:
                         return "modal-lg";
                     case ModalSize.Medium:
+                    case ModalSize.FullHeightRight:
+                        return "modal-full-height modal-right";
                     default:
                         return "";
                 }
@@ -47,6 +49,7 @@ namespace AdminPanel.Models
     {
         Small,
         Large,
-        Medium
+        Medium,
+        FullHeightRight
     }
 }

@@ -13,8 +13,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <title>@ViewData["Title"] - AdminPanel</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">*@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
@@ -22,7 +23,7 @@
 
     <link rel="stylesheet" href="~/modules/plugins/iCheck/all.css">
     <link rel="stylesheet" href="~/modules/plugins/iCheck/flat/blue.css">
-    <link rel="stylesheet" href="~/modules/plugins/datatables/datatables.min.css">
+    <link rel="stylesheet" href="~/modules/plugins/datatables/datatables_bs4.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -48,7 +49,7 @@
                 <span class="logo-lg"><b>Admin</b>Panel</span>
             </a>
             <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
+            <nav class="navbar navbar-static-top navbar-expand-md">
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                     <span class="sr-only">Toggle navigation</span>
@@ -56,21 +57,21 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <li class="dropdown messages-menu nav-item">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
                                 <i class="fa fa-envelope"></i>
                                 <span class="label label-success">4</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
+                                <li class="header dropdown-item">You have 4 messages</li>
+                                <li class="dropdown-item">
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
                                         <li>
                                             <!-- start message -->
                                             <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/AdminTheme/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                                <div class="float-left">
+                                                    <img src="~/AdminTheme/img/user2-160x160.jpg" class="rounded-circle" alt="User Image">
                                                 </div>
                                                 <h4>
                                                     Support Team
@@ -82,8 +83,8 @@
                                         <!-- end message -->
                                         <li>
                                             <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/AdminTheme/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <div class="float-left">
+                                                    <img src="~/AdminTheme/img/user3-128x128.jpg" class="rounded-circle" alt="User Image">
                                                 </div>
                                                 <h4>
                                                     AdminLTE Design Team
@@ -94,8 +95,8 @@
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/AdminTheme/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <div class="float-left">
+                                                    <img src="~/AdminTheme/img/user4-128x128.jpg" class="rounded-circle" alt="User Image">
                                                 </div>
                                                 <h4>
                                                     Developers
@@ -106,8 +107,8 @@
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/AdminTheme/img/user3-128x128.jpg" class="img-circle" alt="User Image">
+                                                <div class="float-left">
+                                                    <img src="~/AdminTheme/img/user3-128x128.jpg" class="rounded-circle" alt="User Image">
                                                 </div>
                                                 <h4>
                                                     Sales Department
@@ -118,8 +119,8 @@
                                         </li>
                                         <li>
                                             <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="~/AdminTheme/img/user4-128x128.jpg" class="img-circle" alt="User Image">
+                                                <div class="float-left">
+                                                    <img src="~/AdminTheme/img/user4-128x128.jpg" class="rounded-circle" alt="User Image">
                                                 </div>
                                                 <h4>
                                                     Reviewers
@@ -130,7 +131,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
+                                <li class="footer dropdown-item"><a href="#">See All Messages</a></li>
                             </ul>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
@@ -475,7 +476,6 @@
     </div>
     <!-- ./wrapper -->
 
-
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -484,18 +484,19 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>*@
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script src="~/modules/plugins/jquery.redirect.js"></script>
     <script src="~/modules/plugins/iCheck/icheck.min.js"></script>
+
     <script src="~/modules/plugins/pdfmake.min.js"></script>
     <script src="~/modules/plugins/vfs_fonts.js"></script>
-    <script src="~/modules/plugins/datatables/datatables.min.js"></script>
+    <script src="~/modules/plugins/datatables/datatables_bs4.min.js"></script>
 
     <script src="~/AdminTheme/js/app.min.js"></script>
     <script src="~/AdminTheme/js/demo.js"></script>
-    <script src="~/js/site.js"></script>
+    <script src="~/js/site.min.js"></script>
 
     @RenderSection("scripts", required: false)
 </body>

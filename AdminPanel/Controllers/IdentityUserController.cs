@@ -47,7 +47,7 @@ namespace AdminPanel.Controllers
                 RoleName = db.Roles.FirstOrDefault(r => r.Id == db.UserRoles.FirstOrDefault(ur => ur.UserId == u.Id).RoleId).Name
             }).ToList();
             if (!(filterRole is null)) {
-                model = model.Where(u => u.RoleName == filterRole).ToList();
+                model = model.Where(u => u.RoleName == db.Roles.FirstOrDefault(r => r.Id == filterRole).Name).ToList();
             }
             if (partial)
                 return PartialView(model);

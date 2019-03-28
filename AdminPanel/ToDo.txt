@@ -1,12 +1,8 @@
-﻿BUG: lista ruoli clicco riga dopo riordinamento griglia
-Messaggio all'invio della mail "devi confermare la mail"
+﻿Messaggio all'invio della mail "devi confermare la mail"
 Gestire gli errori di registrazione
 Reset password utente da dentro e con mail
 Breadcrumb automatico da menu
-
-Capire meglio esecuzione JS su partialView
 Gestire non autorizzato in modal popup
-Verificare e sistemare l'aggancio con bower e le cartelle js/css (cartella dist bootstrap)
 Mettere un log sulla pagina 404 per capire le pagine non trovate
 Pagina 401 access denied
 Gestione custom degli errori anche 500 (vedi mancanza connessione db)
@@ -32,6 +28,4 @@ Vedere questo https://www.mailgun.com/email-api
 * Gestire la registrazione di un nuovo utente, anche da Google con Ruolo di default (Gestita con "senza ruolo" ma homepage senza command)
 * Verifica email nuovo utente
 * Pulire tutti i js importati senza motivo (rimosso bower e fatta pulizia di quello che non uso)
-
-
-
+* Capire meglio esecuzione JS su partialView

@@ -32,7 +32,7 @@ namespace AdminPanel.Controllers
         {
            
             if (partial)
-                return PartialView();
+                return PartialView(User.Claims.ToList());
             else
                 return View(User.Claims.ToList());
         }

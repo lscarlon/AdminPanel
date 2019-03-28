@@ -29,48 +29,42 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
-                            <div class="col-sm-12">
-                                <table id="tb_users" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th style="display:none;">Id</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
+                    <table id="tb_users" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Role</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="display:none;">@item.Id</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Email</td>
+                                    <td>@item.RoleName</td>
+                                    <td>
+                                        @if (@User.HasCommandClaim("IdentityUser", "EditUser"))
                                         {
-                                            <tr>
-                                                <td style="display:none;">@item.Id</td>
-                                                <td>@item.Name</td>
-                                                <td>@item.Email</td>
-                                                <td>@item.RoleName</td>
-                                                <td>
-                                                    @if (@User.HasCommandClaim("IdentityUser", "EditUser"))
-                                                    {
-                                                        <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
-                                                           class="btn btn-info btn-sm">
-                                                            <i class="fa fa-edit"></i>  Edit
-                                                        </a>}
-                                                    @if (@User.HasCommandClaim("IdentityUser", "DeleteUser"))
-                                                    {
-                                                        <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user"
-                                                           class="btn btn-danger btn-sm">
-                                                            <i class="fa fa-trash"></i>  Delete
-                                                        </a>}
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                            <a id="editUserModal" data-toggle="modal" asp-action="EditUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                               class="btn btn-info btn-sm">
+                                                <i class="fa fa-edit"></i>  Edit
+                                            </a>}
+                                        @if (@User.HasCommandClaim("IdentityUser", "DeleteUser"))
+                                        {
+                                            <a id="deleteUserModal" data-toggle="modal" asp-action="DeleteUser" asp-route-id="@item.Id" data-target="#modal-action-user"
+                                               class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>  Delete
+                                            </a>}
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.box-body -->
             </div>

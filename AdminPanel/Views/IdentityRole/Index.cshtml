@@ -30,55 +30,49 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <div class="dataTables_wrapper form-inline dt-bootstrap">
-                        <div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row">
-                            <div class="col-sm-12">
-                                <table id="tb_roles" class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th style="display:none;">Id</th>
-                                            <th>Role</th>
-                                            <th>Description</th>
-                                            <th>Users</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
+                    <table id="tb_roles" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th style="display:none;">Id</th>
+                                <th>Role</th>
+                                <th>Description</th>
+                                <th>Users</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td style="display:none;">@item.Id</td>
+                                    <td>@item.RoleName</td>
+                                    @*<td>@Html.ActionLink(item.RoleName,"Index","IdentityUser",new {filterRole=item.RoleName },null)</td>*@
+                                    <td>@item.Description</td>
+                                    <td>@item.NumberOfUsers</td>
+                                    <td>
+                                        <a id="addEditApplicationRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
+                                           class="btn btn-info btn-sm">
+                                            <i class="fa fa-edit"></i> Edit
+                                        </a>
+                                        @if (@User.HasCommandClaim("IdentityRole", "EditRoleClaim"))
                                         {
-                                            <tr>
-                                                <td style="display:none;">@item.Id</td>
-                                                <td>@item.RoleName</td>
-                                                @*<td>@Html.ActionLink(item.RoleName,"Index","IdentityUser",new {filterRole=item.RoleName },null)</td>*@
-                                                <td>@item.Description</td>
-                                                <td>@item.NumberOfUsers</td>
-                                                <td>
-                                                    <a id="addEditApplicationRoleModal" data-toggle="modal" asp-action="AddEditApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
-                                                       class="btn btn-info btn-sm">
-                                                        <i class="fa fa-edit"></i> Edit
-                                                    </a>
-                                                    @if (@User.HasCommandClaim("IdentityRole", "EditRoleClaim"))
-                                                    {
-                                                        <a id="ApplicationRoleModal" data-toggle="modal" asp-action="EditRoleClaim" asp-route-id="@item.Id" data-target="#modal-action-application-role"
-                                                           class="btn btn-warning btn-sm">
-                                                            <i class="fa fa-user-shield"></i> Permission
-                                                        </a>
-                                                    }
-                                                    @if (item.NumberOfUsers == 0 && @User.HasCommandClaim("IdentityRole", "DeleteApplicationRole"))
-                                                    {
-                                                        <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
-                                                           class="btn btn-danger btn-sm">
-                                                            <i class="fa fa-trash"></i> Delete
-                                                        </a>
-                                                    }
-                                                </td>
-                                            </tr>
+                                            <a id="ApplicationRoleModal" data-toggle="modal" asp-action="EditRoleClaim" asp-route-id="@item.Id" data-target="#modal-action-application-role"
+                                               class="btn btn-warning btn-sm">
+                                                <i class="fa fa-user-shield"></i> Permission
+                                            </a>
                                         }
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                                        @if (item.NumberOfUsers == 0 && @User.HasCommandClaim("IdentityRole", "DeleteApplicationRole"))
+                                        {
+                                            <a id="deleteApplicationRoleModal" data-toggle="modal" asp-action="DeleteApplicationRole" asp-route-id="@item.Id" data-target="#modal-action-application-role"
+                                               class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i> Delete
+                                            </a>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -90,12 +84,13 @@
 </section>
 <!-- /.content -->
 @*Modifica per Warning MVC1000
-Use of IHtmlHelper.Partial may result in application deadlocks. Consider using <partial> Tag Helper or IHtmlHelper.PartialAsync
-    Vecchia versione
-    @Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })*@
-    <partial name="_Modal" model='new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium }' />
+    Use of IHtmlHelper.Partial may result in application deadlocks. Consider using <partial> Tag Helper or IHtmlHelper.PartialAsync
+        Vecchia versione
+        @Html.Partial("_Modal", new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium })*@
+@*<partial name="_Modal" model='new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.Medium }' />*@
+<partial name="_Modal" model='new BootstrapModal { ID = "modal-action-application-role", AreaLabeledId = "modal-action-application-role-label", Size = ModalSize.FullHeightRight }' />
 
-    @section scripts
-        {
-        <script src="~/js/IdentityRole-Index.js" asp-append-version="true"></script>
-    }
+@section scripts
+    {
+    <script src="~/js/IdentityRole-Index.js" asp-append-version="true"></script>
+}
