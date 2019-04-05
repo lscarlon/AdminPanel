@@ -1,0 +1,14 @@
+﻿Gestione errori
+	Startup.cs (Errori prima della pipeline)
+		Variabile di classe - Lista di eccezioni popolata in:
+			try-catch in Startup
+			try-catch in ConfigureServices
+		In Configure
+			verifico la Lista popolata dai metodi sopra e se ci sono eccezioni visualizzo pagina
+			try-catch con Response
+	Errori nella pipeline
+		In Configure
+			 app.UseExceptionHandler("/Error/E500"); <-- Errori non gestiti (status code 500) (throw ex)
+             app.UseStatusCodePagesWithReExecute("/Error/{0}"); <-- Errori gestiti e altri status code tra 400 e 600 (return StatusCode(xxx);)
+	Redirect con status code su 401-403
+		in services.ConfigureApplicationCookie

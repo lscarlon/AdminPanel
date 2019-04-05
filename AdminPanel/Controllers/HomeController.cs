@@ -9,6 +9,7 @@ using AdminPanel.Attributes;
 using AdminPanel.Identity;
 using AdminPanel.Common;
 using Microsoft.Extensions.DependencyInjection;
+using AdminPanel.Models;
 
 namespace AdminPanel.Controllers
 {
@@ -18,10 +19,12 @@ namespace AdminPanel.Controllers
     public class HomeController : CustomController
     {
         private readonly UserManager<User> userManager;
+        private readonly AppDbContext db;
 
         public HomeController(UserManager<User> userManager)
         {
             this.userManager = userManager;
+            this.db = db;
         }
 
         [DisplayActionMenu]
@@ -30,20 +33,22 @@ namespace AdminPanel.Controllers
         //[CommandAuthorize("Homepage")]
         public IActionResult Default(bool partial = false)
         {
-           
+
             if (partial)
                 return PartialView(User.Claims.ToList());
             else
                 return View(User.Claims.ToList());
         }
 
-        public IActionResult Test( [FromServices] IEmailService smtpClient, bool partial = false)
+
+        public IActionResult TestInvioEmail([FromServices] IEmailService smtpClient, bool partial = false)
         {
             string response;
-            EmailMessage emailMessage = new EmailMessage { 
-                FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },    
-                Subject="Oggetto",
-                Content="Messaggio di prova"
+            EmailMessage emailMessage = new EmailMessage
+            {
+                FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },
+                Subject = "Oggetto",
+                Content = "Messaggio di prova"
             };
             emailMessage.ToAddresses.Add(new EmailAddress { Name = "Luigi Carlone", Address = "l.carlone@dpssrl.com" });
 
@@ -51,5 +56,18 @@ namespace AdminPanel.Controllers
             return RedirectToAction("Default");
         }
 
+        public IActionResult TestErrore(bool partial = false)
+        {
+            List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
+            model = userManager.Users.Select(u => new IdentityUserListViewModel
+            {
+                Id = u.Id,
+                Name = u.Name,
+                Email = u.Email,
+                RoleName = db.Roles.First(r => r.Id == db.UserRoles.First(ur => ur.UserId == u.Id).RoleId).Name
+            }).ToList();
+            return RedirectToAction("Default");
+
+        }
     }
 }
