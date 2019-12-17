@@ -30,7 +30,7 @@ namespace AdminPanel
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()
             .UseStartup<Startup>()
-            .UseApplicationInsights()
+            //.UseApplicationInsights()
             .Build();
     }
 }

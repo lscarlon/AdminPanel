@@ -22,6 +22,7 @@ using AdminPanel.Common;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.Extensions.Hosting;
 
 namespace AdminPanel
 {
@@ -32,7 +33,7 @@ namespace AdminPanel
 
         private readonly Dictionary<string, List<Exception>> _exceptions;
 
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             this._exceptions = new Dictionary<string, List<Exception>>
                            {
@@ -111,7 +112,8 @@ namespace AdminPanel
 
                 services.ConfigureApplicationCookie(o =>
                 {
-                    o.Cookie.Expiration = TimeSpan.FromDays(150);
+                    //o.Cookie.Expiration = TimeSpan.FromDays(150);
+                    o.ExpireTimeSpan = TimeSpan.FromDays(150);
                     o.LoginPath = "/Login/Login";
                     o.LogoutPath = "/Login/LockScreen";
                     o.AccessDeniedPath = "/Error/403";
@@ -142,6 +144,7 @@ namespace AdminPanel
                 services.Configure<MvcOptions>(options =>
                 {
                     options.Filters.Add(new RequireHttpsAttribute());
+                    options.EnableEndpointRouting = false;
                 });
 
                 services.AddDistributedMemoryCache();
@@ -159,7 +162,7 @@ namespace AdminPanel
         }
 
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (this._exceptions.Any(p => p.Value.Any()))
             {

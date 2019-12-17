@@ -24,7 +24,7 @@ namespace AdminPanel.Controllers
         public HomeController(UserManager<User> userManager)
         {
             this.userManager = userManager;
-            this.db = db;
+            //this.db = db;
         }
 
         [DisplayActionMenu]

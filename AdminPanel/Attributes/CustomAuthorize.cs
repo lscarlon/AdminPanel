@@ -9,7 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
-using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
+//using static Microsoft.AspNetCore.Hosting.Internal.HostingApplication;
 
 namespace AdminPanel.Attributes
 {
@@ -48,6 +48,11 @@ namespace AdminPanel.Attributes
             }
 
             return Task.FromResult<AuthorizationPolicy>(null);
+        }
+
+        public Task<AuthorizationPolicy> GetFallbackPolicyAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 
