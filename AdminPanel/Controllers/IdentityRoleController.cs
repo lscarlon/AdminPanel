@@ -44,7 +44,7 @@ namespace AdminPanel.Controllers
             }).ToList();
             if (!(filterUser is null))
             { }
-                
+
             if (partial)
                 return PartialView(model);
             else
@@ -139,7 +139,7 @@ namespace AdminPanel.Controllers
         public async Task<IActionResult> EditRoleClaim(string id)
         {
             List<IdentityRoleClaimViewModel> model = new List<IdentityRoleClaimViewModel>();
-        
+
             if (!String.IsNullOrEmpty(id))
             {
                 Role applicationRole = await roleManager.FindByIdAsync(id);
@@ -149,40 +149,71 @@ namespace AdminPanel.Controllers
                 }
                 else
                 {
-                    ViewData["Role"] =applicationRole;
-                    model = db.Commands
-                            .GroupJoin(
-                                db.Menus
-                                .Where(m => m.Controller != null && m.DisplayOrder >= 0)
-                                .GroupBy(m => m.Controller)
-                                .Select(m => new
-                                {
-                                    Controller = m.Key,
-                                    DisplayOrder = m.Min(mm => mm.DisplayOrder)
-                                })
-                                , c => c.Controller, m => m.Controller,
-                                (c, m) => new { c.Controller, c.CommandName, DisplayOrder = (int?)m.FirstOrDefault().DisplayOrder }
-                            )
-                            .GroupJoin(
-                                db.RoleClaims
-                                .Where(c => c.ClaimType == "CommandAuthorize" && c.RoleId == applicationRole.Id)
-                                .Select(c => new
-                                {
-                                    c.ClaimValue,
-                                    c.RoleId
-                                })
-                                , c => c.CommandName, cl => cl.ClaimValue,
-                                (c, cl) => new IdentityRoleClaimViewModel
-                                {
-                                    Controller = c.Controller,
-                                    CommandName = c.CommandName,
-                                    DisplayOrder = c.DisplayOrder.HasValue ? c.DisplayOrder : int.MaxValue,
-                                    Checked = cl.FirstOrDefault().RoleId != null ? true : false
-                                }
+                    ViewData["Role"] = applicationRole;
+                    //model = db.Commands
+                    //        .GroupJoin(
+                    //            db.Menus
+                    //            .Where(m => m.Controller != null && m.DisplayOrder >= 0)
+                    //            .GroupBy(m => m.Controller)
+                    //            .Select(m => new
+                    //            {
+                    //                Controller = m.Key,
+                    //                DisplayOrder = m.Min(mm => mm.DisplayOrder)
+                    //            })
+                    //            , c => c.Controller, m => m.Controller,
+                    //            (c, m) => new { c.Controller, c.CommandName, DisplayOrder = (int?)m.FirstOrDefault().DisplayOrder }
+                    //        )
+                    //        .GroupJoin(
+                    //            db.RoleClaims
+                    //            .Where(c => c.ClaimType == "CommandAuthorize" && c.RoleId == applicationRole.Id)
+                    //            .Select(c => new
+                    //            {
+                    //                c.ClaimValue,
+                    //                c.RoleId
+                    //            })
+                    //            , c => c.CommandName, cl => cl.ClaimValue,
+                    //            (c, cl) => new IdentityRoleClaimViewModel
+                    //            {
+                    //                Controller = c.Controller,
+                    //                CommandName = c.CommandName,
+                    //                DisplayOrder = c.DisplayOrder.HasValue ? c.DisplayOrder : int.MaxValue,
+                    //                Checked = cl.FirstOrDefault().RoleId != null ? true : false
+                    //            }
+                    //        )
+                    //        .OrderBy(c => c.DisplayOrder)
+                    //        .ThenBy(c => c.Controller)
+                    //        .ToList();
+                    model = (from c in db.Commands
+                             from m in db.Menus
+                                         .Where(m => m.Controller != null && m.DisplayOrder >= 0)
+                                         .GroupBy(m => m.Controller)
+                                         .Select(m => new
+                                         {
+                                             Controller = m.Key,
+                                             DisplayOrder = m.Min(mm => mm.DisplayOrder)
+                                         })
+                                         .Where(mm => mm.Controller == c.Controller).DefaultIfEmpty()
+                             from rc in db.RoleClaims
+                                             .Where(rc => rc.ClaimType == "CommandAuthorize" && rc.RoleId == applicationRole.Id)
+                                             .Select(rc => new
+                                             {
+                                                 rc.ClaimValue,
+                                                 rc.RoleId
+                                             })
+                                             .Where(rrcc => rrcc.ClaimValue == c.CommandName).DefaultIfEmpty()
+                             select new IdentityRoleClaimViewModel
+                             {
+                                 Controller = c.Controller,
+                                 CommandName = c.CommandName,
+                                 DisplayOrder = m.DisplayOrder != null ? m.DisplayOrder : int.MaxValue,
+                                 Checked = rc.RoleId != null ? true : false
+                             }
                             )
                             .OrderBy(c => c.DisplayOrder)
                             .ThenBy(c => c.Controller)
                             .ToList();
+
+
                 }
             }
             return PartialView("_EditRoleClaim", model);
@@ -200,7 +231,7 @@ namespace AdminPanel.Controllers
                                          rc.ClaimType == "CommandAuthorize"
                                          && rc.RoleId == id)
                                     .Delete();
-                db.RoleClaims.AddRange(  model.
+                db.RoleClaims.AddRange(model.
                                          Where(rc => rc.Checked == true).
                                          Select(rc => new IdentityRoleClaim<string>
                                          {

@@ -21,10 +21,10 @@ namespace AdminPanel.Controllers
         private readonly UserManager<User> userManager;
         private readonly AppDbContext db;
 
-        public HomeController(UserManager<User> userManager)
+        public HomeController(UserManager<User> userManager, AppDbContext db)
         {
             this.userManager = userManager;
-            //this.db = db;
+            this.db = db;
         }
 
         [DisplayActionMenu]
