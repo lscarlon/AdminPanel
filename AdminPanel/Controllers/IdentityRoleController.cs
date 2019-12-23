@@ -150,39 +150,7 @@ namespace AdminPanel.Controllers
                 else
                 {
                     ViewData["Role"] = applicationRole;
-                    //model = db.Commands
-                    //        .GroupJoin(
-                    //            db.Menus
-                    //            .Where(m => m.Controller != null && m.DisplayOrder >= 0)
-                    //            .GroupBy(m => m.Controller)
-                    //            .Select(m => new
-                    //            {
-                    //                Controller = m.Key,
-                    //                DisplayOrder = m.Min(mm => mm.DisplayOrder)
-                    //            })
-                    //            , c => c.Controller, m => m.Controller,
-                    //            (c, m) => new { c.Controller, c.CommandName, DisplayOrder = (int?)m.FirstOrDefault().DisplayOrder }
-                    //        )
-                    //        .GroupJoin(
-                    //            db.RoleClaims
-                    //            .Where(c => c.ClaimType == "CommandAuthorize" && c.RoleId == applicationRole.Id)
-                    //            .Select(c => new
-                    //            {
-                    //                c.ClaimValue,
-                    //                c.RoleId
-                    //            })
-                    //            , c => c.CommandName, cl => cl.ClaimValue,
-                    //            (c, cl) => new IdentityRoleClaimViewModel
-                    //            {
-                    //                Controller = c.Controller,
-                    //                CommandName = c.CommandName,
-                    //                DisplayOrder = c.DisplayOrder.HasValue ? c.DisplayOrder : int.MaxValue,
-                    //                Checked = cl.FirstOrDefault().RoleId != null ? true : false
-                    //            }
-                    //        )
-                    //        .OrderBy(c => c.DisplayOrder)
-                    //        .ThenBy(c => c.Controller)
-                    //        .ToList();
+
                     model = (from c in db.Commands
                              from m in db.Menus
                                          .Where(m => m.Controller != null && m.DisplayOrder >= 0)
@@ -190,7 +158,7 @@ namespace AdminPanel.Controllers
                                          .Select(m => new
                                          {
                                              Controller = m.Key,
-                                             DisplayOrder = m.Min(mm => mm.DisplayOrder)
+                                             DisplayOrder = (int?)m.Min(mm => mm.DisplayOrder)
                                          })
                                          .Where(mm => mm.Controller == c.Controller).DefaultIfEmpty()
                              from rc in db.RoleClaims
@@ -212,7 +180,6 @@ namespace AdminPanel.Controllers
                             .OrderBy(c => c.DisplayOrder)
                             .ThenBy(c => c.Controller)
                             .ToList();
-
 
                 }
             }
