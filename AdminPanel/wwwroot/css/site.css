@@ -161,3 +161,7 @@
     font-weight: bold;
     font-family: 'Roboto',arial,sans-serif;
 }
+
+.input-validation-error + span {
+    color: #a94442 !important;
+}

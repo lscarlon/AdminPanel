@@ -44,6 +44,7 @@ namespace AdminPanel.Controllers
         public IActionResult TestInvioEmail([FromServices] IEmailService smtpClient, bool partial = false)
         {
             string response;
+            
             EmailMessage emailMessage = new EmailMessage
             {
                 FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },

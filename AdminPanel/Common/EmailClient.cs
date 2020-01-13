@@ -3,6 +3,7 @@ using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 
 //https://dotnetcoretutorials.com/2017/11/02/using-mailkit-send-receive-email-asp-net-core/
@@ -39,6 +40,9 @@ namespace AdminPanel.Common
         bool SmtpSSL { get; }
         string SmtpUsername { get; set; }
         string SmtpPassword { get; set; }
+        bool UseOldSSLProtocols { get; }
+        bool CertificateValidation { get; }
+        
     }
 
     public class EmailSettings : IEmailSettings
@@ -48,6 +52,8 @@ namespace AdminPanel.Common
         public bool SmtpSSL { get; set; }
         public string SmtpUsername { get; set; }
         public string SmtpPassword { get; set; }
+        public bool UseOldSSLProtocols { get; set; }
+        public bool CertificateValidation { get; set; }
     }
 
     public interface IEmailService
@@ -83,6 +89,10 @@ namespace AdminPanel.Common
 
                 using (var emailClient = new SmtpClient())
                 {
+                    if (_emailSettings.UseOldSSLProtocols)
+                        emailClient.SslProtocols = SslProtocols.Ssl2 | SslProtocols.Ssl3 | SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12 | SslProtocols.Tls13;
+                    if (! _emailSettings.CertificateValidation)
+                        emailClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
                     emailClient.Connect(_emailSettings.SmtpServer, _emailSettings.SmtpPort, _emailSettings.SmtpSSL);
                     emailClient.AuthenticationMechanisms.Remove("XOAUTH2");
                     if (_emailSettings.SmtpUsername != "" && _emailSettings.SmtpPassword != "")
