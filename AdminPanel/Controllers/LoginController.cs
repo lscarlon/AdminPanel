@@ -30,10 +30,15 @@ namespace AdminPanel.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult Login(string returnUrl = null, string UserName=null)
+        public IActionResult Login(string returnUrl = null, string UserName = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             ViewData["UserName"] = UserName;
+            if (TempData["ConfirmEmailMessage"] != null && Convert.ToBoolean(TempData["ConfirmEmailMessage"]))
+            {
+                ViewData["ConfirmEmailMessage"] = "You need to confirm your email to login";
+                TempData.Remove("ConfirmEmailMessage");
+            }
             return View();
         }
 
@@ -211,7 +216,7 @@ namespace AdminPanel.Controllers
                     {
                         var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                         var callBackUrl = Url.Action(
-                            "ConfirmEmail","Login",
+                            "ConfirmEmail", "Login",
                             values: new { userId = user.Id, code },
                             protocol: Request.Scheme);
 
@@ -224,13 +229,18 @@ namespace AdminPanel.Controllers
                         emailMessage.ToAddresses.Add(new EmailAddress { Name = user.Name, Address = user.Email });
                         smtpClient.Send(emailMessage, out string response);
 
+                        //Auto login
                         //await signInManager.SignInAsync(user, isPersistent: false);
                         //return RedirectToLocal(null);
+                        TempData["ConfirmEmailMessage"] = true;
                         return RedirectToAction("Login");
                     }
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Register Error");
+                        foreach (string error in result.Errors.Select(e => e.Description).ToArray())
+                        {
+                            ModelState.AddModelError(string.Empty, error);
+                        }
                         return View(model);
                     }
                 }

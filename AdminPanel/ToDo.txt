@@ -1,18 +1,17 @@
-﻿Messaggio all'invio della mail "devi confermare la mail" (Se l'invio è andato a buon fine)
-Gestire gli errori di registrazione (utente esiste già)
-Reset password utente da dentro e con mail
+﻿Reset password utente da dentro e con mail
 Breadcrumb automatico da menu
 Gestire non autorizzato in modal popup*****
 Mettere un log sulla pagina 404 per capire le pagine non trovate
 Pagina 404 con layout non autenticato
 Evitare StartUpMethods.RunAll ogni volta (basato su dataora compilazione e valore su db?)
-Nella Home, se non ho gruppo dire che ci si deve far autorizzare
 Gestione centralizzata degli errori
 
 *************************************************************
 Vedere questo https://www.mailgun.com/email-api
 *************************************************************
-
+* Nella Home, se non ho gruppo dire che ci si deve far autorizzare
+* Messaggio all'invio della mail "devi confermare la mail" (Se l'invio è andato a buon fine)
+* Gestire gli errori di registrazione (utente esiste già)
 * Errore lista utenti per utente senza ruolo 
 * Pubblicazione su IIS (con fatica! attenzione a usersecrets e .net core hosting bundle)
 * LogOff come post dal menù

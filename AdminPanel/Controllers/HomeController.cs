@@ -33,6 +33,7 @@ namespace AdminPanel.Controllers
         //[CommandAuthorize("Homepage")]
         public IActionResult Default(bool partial = false)
         {
+            ViewBag.RolesCount = User.Claims.Where(c => c.Type == ClaimTypes.Role).Count();
 
             if (partial)
                 return PartialView(User.Claims.ToList());
@@ -44,7 +45,7 @@ namespace AdminPanel.Controllers
         public IActionResult TestInvioEmail([FromServices] IEmailService smtpClient, bool partial = false)
         {
             string response;
-            
+
             EmailMessage emailMessage = new EmailMessage
             {
                 FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },
@@ -57,7 +58,7 @@ namespace AdminPanel.Controllers
             return RedirectToAction("Default");
         }
 
-        public IActionResult TestErrore(bool partial = false)
+        public IActionResult Test(bool partial = false)
         {
             List<IdentityUserListViewModel> model = new List<IdentityUserListViewModel>();
             model = userManager.Users.Select(u => new IdentityUserListViewModel

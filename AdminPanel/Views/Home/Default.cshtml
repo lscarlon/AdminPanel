@@ -1,7 +1,6 @@
 ﻿
 @using System.Security.Claims
 @model List<Claim>
-
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
@@ -16,6 +15,10 @@
 
 <!-- Main content -->
 <section class="content">
+    @if (ViewBag.RolesCount == 0)
+    {
+        <div class="text-danger">Missing Roles, ask to Administrator</div>
+    }
     @foreach (Claim cl in Model)
     {
         @*<span>Issuer: @cl.Issuer</span><br />
