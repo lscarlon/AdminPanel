@@ -1,4 +1,5 @@
-﻿Reset password utente da dentro e con mail
+﻿stile pulsanti cambio password
+Cambio password utente e Reset password dall'amministratore
 Breadcrumb automatico da menu
 Gestire non autorizzato in modal popup*****
 Mettere un log sulla pagina 404 per capire le pagine non trovate
@@ -9,6 +10,7 @@ Gestione centralizzata degli errori
 *************************************************************
 Vedere questo https://www.mailgun.com/email-api
 *************************************************************
+* Recupero password dimenticata
 * Nella Home, se non ho gruppo dire che ci si deve far autorizzare
 * Messaggio all'invio della mail "devi confermare la mail" (Se l'invio è andato a buon fine)
 * Gestire gli errori di registrazione (utente esiste già)

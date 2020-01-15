@@ -94,6 +94,22 @@ namespace AdminPanel.Models
         public bool TermsAccepted { get; set; }
     }
 
+    public class IdentityRecoverPasswordViewModel
+    {
+        public string Token { get; set; }
+
+        public string UserName { get; set; }
+
+        [Required]
+        public string Email { get; set; }
+
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        [DataType(DataType.Password)]
+        public string RetypePassword { get; set; }
+    }
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

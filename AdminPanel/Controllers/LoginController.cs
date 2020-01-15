@@ -270,5 +270,97 @@ namespace AdminPanel.Controllers
             }
             return RedirectToAction("Login");
         }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public IActionResult RecoverPassword(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View();
+            }
+            else
+            {
+                ViewData["userId"] = userId;
+                ViewData["code"] = code;
+                User user = userManager.FindByIdAsync(userId).Result;
+                if (user != null)
+                {
+                    ViewData["UserName"] = user.UserName;
+                    ViewData["Email"] = user.Email;
+                }
+                return View();
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult RecoverPassword([FromServices] IEmailService smtpClient, IdentityRecoverPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (model.Token == null && model.UserName == null) //prima richiesta: invio mail
+                {
+                    User user = userManager.FindByEmailAsync(model.Email).Result;
+                    if (user == null || !(userManager.IsEmailConfirmedAsync(user).Result))
+                    {
+                        ModelState.AddModelError(string.Empty, "Email non associata a nessun utente attivo");
+                        return View(model);
+                    }
+                    else
+                    {
+                        var code = userManager.GeneratePasswordResetTokenAsync(user).Result;
+                        var callBackUrl = Url.Action(
+                            "RecoverPassword", "Login",
+                            values: new { userId = user.Id, code },
+                            protocol: Request.Scheme);
+
+                        EmailMessage emailMessage = new EmailMessage
+                        {
+                            FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },
+                            Subject = "Reset Password Link",
+                            Content = $"Your username is '{user.Name}'. To reset your password please follow this link <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>."
+                        };
+                        emailMessage.ToAddresses.Add(new EmailAddress { Name = user.Name, Address = user.Email });
+                        smtpClient.Send(emailMessage, out string response);
+                        //TempData["ConfirmEmailMessage"] = true;
+                        return RedirectToAction("Login");
+                    }
+                }
+                else //post con la nuova password
+                {
+                    if (model.Password == model.RetypePassword)
+                    {
+                        User user = userManager.FindByEmailAsync(model.Email).Result;
+                        if (user.UserName != model.UserName)
+                        {
+                            ModelState.AddModelError(string.Empty, "Email and UserName doesn't match");
+                            return View(model);
+                        }
+                        IdentityResult result = userManager.ResetPasswordAsync(user, model.Token, model.Password).Result;
+                        if (result.Succeeded)
+                        {
+                            TempData["ConfirmEmailMessage"] = true;
+                            return RedirectToAction("Login");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(string.Empty, "Error resetting password");
+                            return View(model);
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Password mismatch");
+                        ViewData["UserName"] = model.UserName;
+                        ViewData["Email"] = model.Email;
+                        return View(model);
+                    }
+                }
+
+            }
+            return View(model);
+        }
     }
 }
