@@ -12,3 +12,7 @@
              app.UseStatusCodePagesWithReExecute("/Error/{0}"); <-- Errori gestiti e altri status code tra 400 e 600 (return StatusCode(xxx);)
 	Redirect con status code su 401-403
 		in services.ConfigureApplicationCookie
+
+Pubblicazione IIS
+	Copiare User Secrets in appsetting.json
+	Se già pubblicato non sovrascrivere web.config e appsetting.json
