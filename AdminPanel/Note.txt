@@ -16,3 +16,22 @@
 Pubblicazione IIS
 	Copiare User Secrets in appsetting.json
 	Se già pubblicato non sovrascrivere web.config e appsetting.json
+
+User secrets
+{
+  "Authentication": {
+    "Google": {
+      "ClientId": "----------.apps.googleusercontent.com",
+      "ClientSecret": "-------"
+    }
+  },
+  "EmailConfiguration": {
+    "SmtpServer": "-----",
+    "SmtpPort": 25,
+    "SmtpSSL": false,
+    "SmtpUsername": "------",
+    "SmtpPassword": "-----",
+    "UseOldSSLProtocols": true,
+    "CertificateValidation": false
+  }
+}

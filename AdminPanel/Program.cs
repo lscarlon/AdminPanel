@@ -26,7 +26,7 @@ namespace AdminPanel
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             //.UseIIS()
-            .UseKestrel()
+            //.UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseIISIntegration()
             .UseStartup<Startup>()

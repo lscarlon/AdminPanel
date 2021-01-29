@@ -320,7 +320,7 @@ namespace AdminPanel.Controllers
                         {
                             FromAddress = new EmailAddress { Name = "AdminPanel", Address = "adminpanel@l.carlone.it" },
                             Subject = "Reset Password Link",
-                            Content = $"Your username is '{user.Name}'. To reset your password please follow this link <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>."
+                            Content = $"Your username is '{user.UserName}'. To reset your password please follow this link <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>."
                         };
                         emailMessage.ToAddresses.Add(new EmailAddress { Name = user.Name, Address = user.Email });
                         smtpClient.Send(emailMessage, out string response);
