@@ -190,7 +190,7 @@ namespace AdminPanel
                 if (env.IsDevelopment())
                 {
                     app.UseDeveloperExceptionPage();
-                    app.UseBrowserLink();
+                    //app.UseBrowserLink();
                 }
                 else
                 {
@@ -210,7 +210,7 @@ namespace AdminPanel
                 {
                     routes.MapRoute(
                         name: "default",
-                        template: "{controller=Home}/{action=Default}/{id?}");
+                        template: "{controller=Login}/{action=Login}/{id?}");
                 });
 
                 app.UseRewriter(new RewriteOptions().AddRedirectToHttps());
